@@ -35,6 +35,17 @@ public class PlaylistManager {
         return this.playlists.get(aktPlaylist).getName();
     }
 
+    public ArrayList<String> getPlaylistNames(){
+        ArrayList<String> playlistnames = new ArrayList<>();
+        if (playlists!=null){
+            for (int i=0; i<playlists.size(); i++){
+                playlistnames.add(playlists.get(i).getName());
+            }
+            return playlistnames;
+        }
+        return null;
+    }
+
     public void savePlaylist(Playlist playlist){
         this.playlists.add(playlist);
     }

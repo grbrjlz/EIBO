@@ -1,5 +1,6 @@
 .label {
     -fx-font-family: 'DejaVu Sans Mono', monospace;
+    -fx-text-fill: #bbbbbb;
 }
 
 #title {

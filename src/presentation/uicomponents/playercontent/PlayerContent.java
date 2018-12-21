@@ -22,7 +22,7 @@ public class PlayerContent extends VBox {
         this.setMinWidth(760);
         this.setPrefWidth(760);
         this.setPrefHeight(520);
-        this.setStyle("-fx-background-color: #F2F2F2;");
+        this.setStyle("-fx-background-color: #2E2E30;");
         this.getChildren().addAll(cover, songinfo);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
