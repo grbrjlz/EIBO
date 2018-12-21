@@ -6,7 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.scenes.playerview.PlayerViewController;
-import presentation.scenes.playlistview.PlayListViewController;
+import presentation.scenes.playlistview.PlaylistViewController;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
@@ -16,7 +16,7 @@ public class Main extends Application {
     private PlaylistManager manager;
     private Mp3Player player;
     private PlayerViewController playerViewController;
-    private PlayListViewController playListViewController;
+    private PlaylistViewController playlistViewController;
     private Stage primaryStage;
 
     @Override
@@ -28,7 +28,7 @@ public class Main extends Application {
         player = new Mp3Player(defPlaylist);
 
         playerViewController = new PlayerViewController(player, this);
-        playListViewController = new PlayListViewController(player, this);
+        playlistViewController = new PlaylistViewController(player, manager,this);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class Main extends Application {
                 scene.setRoot(playerViewController.getView());
                 break;
             case "LIST":
-                scene.setRoot(playListViewController.getView());
+                scene.setRoot(playlistViewController.getView());
         }
     }
 

@@ -4,22 +4,15 @@ import java.util.ArrayList;
 
 public class PlaylistManager {
 
-    private Playlist aktuell;
-    //private HashMap<String, Playlist> playlists = new HashMap<>();
-
+    private int aktPlaylist;
     private ArrayList<Playlist> playlists = new ArrayList<>();
 
-/*
-    public Backend.PlaylistManager (){
-        this.aktuell = new Backend.Playlist();
-    }
-*/
 
     //KONSTRUKTOREN
 
     public  PlaylistManager (Playlist playlist){
-        this.aktuell=playlist;
         this.playlists.add(playlist);
+        this.aktPlaylist = 0;
     }
 
     //GETTER
@@ -34,27 +27,13 @@ public class PlaylistManager {
     }
 
     public Playlist getAktPlaylist(){
-        return this.aktuell;
-    }
-
-    public void settingsInfo(){
-        String s, r;
-        if (aktuell.isShuffle()) s="ON";
-        else s="OFF";
-        if (aktuell.isRepeat()) r="ON";
-        else r="OFF";
-        System.out.println("Aktuelle Einstellungen: Repeat: "+r+" | "+"Shuffle: "+s);
-    }
-
-    public void playlistInfo(){
-        System.out.println("Aktuelle Backend.Playlist: "+aktuell.getName());
-    }
-
-    public void songInfo(){
-        System.out.println("Aktueller Song: "+aktuell.getAktSong().getName());
+        return this.playlists.get(aktPlaylist);
     }
 
 
+    public String getAktPlaylistName(){
+        return this.playlists.get(aktPlaylist).getName();
+    }
 
     public void savePlaylist(Playlist playlist){
         this.playlists.add(playlist);

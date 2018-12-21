@@ -7,6 +7,7 @@ import presentation.uicomponents.playlistcontent.PlaylistContent;
 import presentation.uicomponents.sidepanel.SidePanel;
 import presentation.uicomponents.toppanel.TopPanel;
 import structure.Mp3Player;
+import structure.PlaylistManager;
 
 class PlaylistView extends BorderPane {
     private TopPanel topPanel;
@@ -15,15 +16,17 @@ class PlaylistView extends BorderPane {
     private PlaylistContent playlistContent;
     private BottomPanel bottomPanel;
     private Mp3Player player;
+    private PlaylistManager manager;
 
 
-    PlaylistView(Mp3Player player) {
+    PlaylistView(Mp3Player player, PlaylistManager manager) {
         this.player = player;
+        this.manager = manager;
         this.topPanel = new TopPanel();
         this.bottomPanel = new BottomPanel(player);
         this.sidePanelLeft = new SidePanel();
         this.sidePanelRight = new SidePanel();
-        this.playlistContent = new PlaylistContent(player);
+        this.playlistContent = new PlaylistContent(player, manager);
 
         this.setTop(topPanel);
         this.setBottom(bottomPanel);

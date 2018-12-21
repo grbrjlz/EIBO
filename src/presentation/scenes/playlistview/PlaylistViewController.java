@@ -7,26 +7,29 @@ import presentation.uicomponents.playercontrol.PlayerControl;
 import presentation.uicomponents.playlistcontent.PlaylistContent;
 import presentation.uicomponents.viewcontrol.ViewControl;
 import structure.Mp3Player;
+import structure.PlaylistManager;
 
-public class PlayListViewController {
+public class PlaylistViewController {
 
     private PlaylistView view;
 
     private PlayerControl playerControl;
     private ViewControl viewControl;
     private PlaylistContent content;
-
     private Mp3Player player;
+    private PlaylistManager manager;
+
     private Main application;
     private boolean isPlaying;
 
 
-    public PlayListViewController(Mp3Player player, Main application){
+    public PlaylistViewController(Mp3Player player,PlaylistManager manager, Main application){
 
         isPlaying = false;
 
         this.player = player;
-        this.view = new PlaylistView(player);
+        this.manager = manager;
+        this.view = new PlaylistView(player, manager);
 
         this.content = view.getPlaylistContent();
         this.playerControl = view.getBottomPanel().getPlayercontrol();
@@ -54,12 +57,12 @@ public class PlayListViewController {
 
         playerControl.getSkip().addEventHandler(ActionEvent.ACTION, e -> {
             player.skip();
-            view.setPlaylistContent(new PlaylistContent(player));
+            view.setPlaylistContent(new PlaylistContent(player, manager));
         });
 
         playerControl.getBack().addEventHandler(ActionEvent.ACTION, e -> {
             player.back();
-            view.setPlaylistContent(new PlaylistContent(player));
+            view.setPlaylistContent(new PlaylistContent(player, manager));
         });
 
         playerControl.getShuffle().addEventHandler(ActionEvent.ACTION, e -> {
