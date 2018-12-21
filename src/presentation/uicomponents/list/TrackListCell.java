@@ -35,7 +35,7 @@ public class TrackListCell extends ListCell<Track> {
         setGraphic(null);
         if (x != null) {
             titleLabel.setText(x.getName());
-            artistLabel.setText(x.getInterpret());
+            artistLabel.setText(x.getArtist());
             albumLabel.setText(x.getAlbum());
             this.setGraphic(root);
         } else {

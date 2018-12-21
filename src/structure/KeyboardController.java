@@ -68,8 +68,8 @@ public class KeyboardController {
                     player.pause();break;
                 case stop:
                     player.stop();break;
-                case info:
-                    player.info();break;
+                //case info:
+                    //player.info();break;
                 case skip:
                     manager.getAktPlaylist().skipToNextSong();
                     manager.songInfo();
@@ -93,7 +93,7 @@ public class KeyboardController {
             }
         } else if (line.length == 2)
             switch (command){
-                case play: player.play("songs/" + line[1] + ".mp3"); break;
+                //case play: player.play("songs/" + line[1] + ".mp3"); break;
                 case volume: player.volume(Float.parseFloat(line[1])); break;
                 //case set:
             }

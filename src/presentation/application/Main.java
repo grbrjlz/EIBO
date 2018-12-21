@@ -25,7 +25,9 @@ public class Main extends Application {
 
         defPlaylist = new Playlist();
         manager = new PlaylistManager(defPlaylist);
-        player = new Mp3Player(manager.getAktPlaylist().getAktSong().getSong());
+
+        player = new Mp3Player(defPlaylist);
+
         playerViewController = new PlayerViewController(player,defPlaylist,manager,this);
         playListViewController = new PlayListViewController(defPlaylist,player,manager,this);
     }

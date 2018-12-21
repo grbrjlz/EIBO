@@ -19,10 +19,14 @@ public class Mp3Player {
 
     SimpleMinim minim = new SimpleMinim(true);
     SimpleAudioPlayer audioPlayer;
-    Mp3File aktSong;
+    //Mp3File aktSong;
 
-    public Mp3Player(Mp3File firstSong){
-        this.aktSong = firstSong;
+    int aktSong;
+    Playlist aktPlaylist;
+
+    public Mp3Player(Playlist aktPlaylist){
+        this.aktSong = 0;
+        this.aktPlaylist = aktPlaylist;
     }
 
     /*public void setAktSong(Mp3File song){
@@ -30,7 +34,7 @@ public class Mp3Player {
     }*/
 
     public void play(){
-        this.audioPlayer = minim.loadMP3File(aktSong.getFilename());
+        this.audioPlayer = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
         audioPlayer.play();
     }
 
@@ -40,12 +44,13 @@ public class Mp3Player {
         this.audioPlayer = minim.loadMP3File(aktSong.getFilename());
         audioPlayer.play();
     }
-*/
+
 
     public void play(String filename) {
         this.audioPlayer = minim.loadMP3File(filename);
         audioPlayer.play();
     }
+    */
 
     public void pause() {
         audioPlayer.pause();
@@ -56,21 +61,24 @@ public class Mp3Player {
         audioPlayer.rewind();
     }
 
-    public String getAktSongName() {
-        if (aktSong.hasId3v1Tag()){
-            ID3v1 id3v1Tag = aktSong.getId3v1Tag();
-            return id3v1Tag.getTitle();
-        } else return ("id3 tag missing");
+    public void skip() {
+
     }
 
-    public String getAktArtistName() {
-        if (aktSong.hasId3v1Tag()){
-            ID3v1 id3v1Tag = aktSong.getId3v1Tag();
-            return id3v1Tag.getArtist();
-        } else return ("id3 tag missing");
+    public String getAktName() {
+        return aktPlaylist.getSong(aktSong).getName();
     }
 
-    public void info() {
+    public String getAktTitle() {
+        return aktPlaylist.getSong(aktSong).getTitle();
+    }
+
+    public String getAktArtist() {
+        return aktPlaylist.getSong(aktSong).getArtist();
+
+    }
+
+    /*public void info() {
         System.out.println("Dateiname: " + aktSong.getFilename());
             System.out.println("Länge: " + aktSong.getLengthInSeconds() + " Sekunden");
             System.out.println("Bitrate: " + aktSong.getBitrate() + " kbps");
@@ -91,16 +99,11 @@ public class Mp3Player {
 
             }
 
-    }
+    }*/
 
-    public byte[] getCover() throws IOException {
-        if (aktSong.hasId3v2Tag()) {
-            ID3v2 id3v2tag = aktSong.getId3v2Tag();
-            byte[] b = id3v2tag.getAlbumImage();
+    public byte[] getCover() {
+        return aktPlaylist.getSong(aktSong).getCover();
 
-            return b;
-        }
-        return null;
     }
 
     public void volume(float value) {

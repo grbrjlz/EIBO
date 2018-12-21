@@ -178,6 +178,14 @@ public class Playlist {
         return this.songs;
     }
 
+    public String getSongName(int i){
+        return songs.get(i).getName();
+    }
+
+    public Mp3File getMp3(int i){
+        return songs.get(i).getSong();
+    }
+
     public Track getSong(int i){
         return songs.get(i);
     }

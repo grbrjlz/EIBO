@@ -19,10 +19,10 @@ public class SongInfo extends VBox {
         this.player = player;
         this.manager = manager;
 
-        Label songname = new Label(player.getAktSongName());
+        Label songname = new Label(player.getAktName());
         songname.setId("song");
 
-        Label artistname = new Label(player.getAktArtistName());
+        Label artistname = new Label(player.getAktArtist());
         artistname.setId("artist");
 
         Label playlistname = new Label(manager.getAktPlaylist().getName());

@@ -18,7 +18,7 @@ public class PlayerControl extends HBox {
     public Button play;
     public Button stop;
     public Button skip;
-    private Button back;
+    public Button back;
     private Button shuffle;
     private Button repeat;
 

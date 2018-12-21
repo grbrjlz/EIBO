@@ -53,18 +53,24 @@ public class PlayerViewController {
                 isPlaying = false;
             }
         });
+
         pc.stop.addEventHandler(ActionEvent.ACTION, e -> {
             player.stop();
             isPlaying = false;
         });
-        pc.skip.addEventHandler(ActionEvent.ACTION, e -> skipPlay());
+
+        pc.skip.addEventHandler(ActionEvent.ACTION, e -> {
+            player.stop();
+
+        });
+
+        pc.back.addEventHandler(ActionEvent.ACTION, e -> {
+            player.stop();
+        });
+
         switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
         switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
 
-    }
-    public void skipPlay() {
-        //defPlaylist.skipToNextSong();
-        player.play();
     }
 
     public PlayerView getView() {
