@@ -37,9 +37,6 @@ public class PlayerControl extends HBox {
         repeat = new Button();
         repeat.setId("repeat");
 
-
-
-
         this.setSpacing(10);
         this.setPadding(new Insets(10));
         this.setAlignment(Pos.CENTER);

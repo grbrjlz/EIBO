@@ -40,7 +40,7 @@ public class Main extends Application {
 
         //switchView("PLAYER");
         Scene scene = new Scene(root, 1000, 750);
-        scene.setRoot(playerViewController.getView());
+        scene.setRoot(playlistViewController.getView());
 
         scene.getStylesheets().add(getClass().
                 getResource("application.css").toExternalForm());

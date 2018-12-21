@@ -105,6 +105,17 @@ public class Playlist {
         return this.songs;
     }
 
+    public ArrayList<String> getSongNames() {
+        ArrayList<String> songnames = new ArrayList<>();
+        if (songs!=null){
+            for (int i=0; i<size; i++){
+                songnames.add(songs.get(i).getTitle());
+            }
+            return songnames;
+        }
+        return null;
+    }
+
     String getSongName(int i){
         return songs.get(i).getName();
     }
