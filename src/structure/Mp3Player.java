@@ -104,13 +104,14 @@ public class Mp3Player {
 
     }
 
-    public void volume(float value) {
+    public void setVolume(float value) {
         player.setGain(value);
     }
 
-    /*public String getAktSongInfo(){
-        return aktSong.getFilename();
-    }*/
+    public float getVolume(){
+        return player.getGain();
+    }
+
 
 }
 

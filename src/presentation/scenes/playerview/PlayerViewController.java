@@ -1,5 +1,7 @@
 package presentation.scenes.playerview;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import presentation.application.Main;
 import presentation.uicomponents.playercontent.PlayerContent;
@@ -68,6 +70,15 @@ public class PlayerViewController {
         playerControl.getRepeat().addEventHandler(ActionEvent.ACTION, e -> {
             player.repeat();
         });
+
+
+       playerControl.getVolume().valueProperty().addListener((observable, oldValue, newValue) -> {
+
+            player.setVolume(newValue.floatValue());
+           view.getBottomPanel().getPlayercontrol().getVolumelabel().setText(newValue.toString());
+        });
+
+
 
         viewControl.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
 

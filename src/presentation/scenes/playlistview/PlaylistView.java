@@ -3,6 +3,7 @@ package presentation.scenes.playlistview;
 import javafx.scene.layout.*;
 import presentation.uicomponents.bottompanel.BottomPanel;
 import presentation.uicomponents.playercontent.PlayerContent;
+import presentation.uicomponents.playercontrol.PlayerControl;
 import presentation.uicomponents.playlistcontent.PlaylistContent;
 import presentation.uicomponents.sidepanel.SidePanel;
 import presentation.uicomponents.toppanel.TopPanel;
@@ -54,6 +55,6 @@ class PlaylistView extends BorderPane {
     void setPlaylistContent(PlaylistContent content){
         this.playlistContent = content;
         this.setCenter(playlistContent);
-
     }
+
 }

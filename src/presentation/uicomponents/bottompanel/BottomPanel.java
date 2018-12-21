@@ -25,5 +25,9 @@ public class BottomPanel extends StackPane {
         return this.playercontrol;
     }
 
+    public void setPlayercontrol(PlayerControl playercontrol){
+        this.playercontrol = playercontrol;
+    }
+
 }
 
