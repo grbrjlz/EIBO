@@ -1,62 +1,85 @@
 package presentation.scenes.playlistview;
 
 import javafx.event.ActionEvent;
-import javafx.scene.control.Button;
-import javafx.scene.layout.Pane;
 import presentation.application.Main;
-import presentation.uicomponents.bottompanel.BottomPanel;
+import presentation.uicomponents.playercontent.PlayerContent;
 import presentation.uicomponents.playercontrol.PlayerControl;
-import presentation.uicomponents.toppanel.TopPanel;
+import presentation.uicomponents.playlistcontent.PlaylistContent;
+import presentation.uicomponents.viewcontrol.ViewControl;
 import structure.Mp3Player;
-import structure.Playlist;
-import structure.PlaylistManager;
 
 public class PlayListViewController {
 
     private PlaylistView view;
-    private PlayerControl pc;
-    private Pane listView;
+
+    private PlayerControl playerControl;
+    private ViewControl viewControl;
+    private PlaylistContent content;
+
     private Mp3Player player;
-    private TopPanel topPanel;
     private Main application;
-    private Button switchPlayer;
-    private Button switchList;
-    private BottomPanel bottomPanel;
     private boolean isPlaying;
 
 
-    public PlayListViewController(Playlist defPlaylist, Mp3Player player, PlaylistManager manager, Main application) {
+    public PlayListViewController(Mp3Player player, Main application){
 
         isPlaying = false;
-        this.view = new PlaylistView(defPlaylist, player, manager);
+
         this.player = player;
-        this.listView = view.listView;
-        this.topPanel = view.topPanel;
-        //this.switchList = view.topPanel.switchList;
-        //this.switchPlayer = view.topPanel.switchPlayer;
+        this.view = new PlaylistView(player);
+
+        this.content = view.getPlaylistContent();
+        this.playerControl = view.getBottomPanel().getPlayercontrol();
+        this.viewControl = view.getTopPanel().getViewcontrol();
+
         this.application = application;
-        this.bottomPanel = view.bottomPanel;
-        this.pc = bottomPanel.playercontrol;
         initialize();
     }
 
-    private void initialize() {
-        /*pc.play.addEventHandler(ActionEvent.ACTION, e -> {
+    private void initialize(){
+        playerControl.getPlay().addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
                 isPlaying = true;
+            } else {
+                player.pause();
+                isPlaying = false;
             }
         });
-        pc.stop.addEventHandler(ActionEvent.ACTION, e -> {
+
+        playerControl.getStop().addEventHandler(ActionEvent.ACTION, e -> {
             player.stop();
             isPlaying = false;
         });
-        //switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
-        //switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));*/
+
+        playerControl.getSkip().addEventHandler(ActionEvent.ACTION, e -> {
+            player.skip();
+            view.setPlaylistContent(new PlaylistContent(player));
+        });
+
+        playerControl.getBack().addEventHandler(ActionEvent.ACTION, e -> {
+            player.back();
+            view.setPlaylistContent(new PlaylistContent(player));
+        });
+
+        playerControl.getShuffle().addEventHandler(ActionEvent.ACTION, e -> {
+            player.shuffle();
+        });
+
+        playerControl.getRepeat().addEventHandler(ActionEvent.ACTION, e -> {
+            player.repeat();
+        });
+
+        viewControl.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
+
+
+
     }
 
     public PlaylistView getView() {
-        return view;
+        return this.view;
     }
+
+
 }
 
