@@ -4,33 +4,47 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
 public class Playlist {
     private String name;
-    private HashMap<Integer, Mp3File> songs;
+    //private HashMap<Integer, Track> songs;
+    private ArrayList<Track> songs;
+
     private int aktSong, size;
+    //private Track aktSong;
+    //private int size;
+
     private boolean shuffle, repeat;
 
     //KONSTRUKTOREN
 
     public Playlist (){
-        //Erstellt default-Playlist mit allen vorhandenen Songs in default Directory
+        //Erstellt default-list mit allen vorhandenen Songs in default Directory
+        songs = new ArrayList<Track>();
+
         File file = new File("default.m3u");
-        File directory = new File("songs/");
+        File directory = new File("./songs");
         File[] content = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
+
         if (content!=null) Arrays.sort(content);
-        songs = fileToMp3Hash(content);
+        //songs = fileToMp3Hash(content);
+        songs = fileToTrackArrayList(content);
 
         try {
-            createFile(file);
+            file.createNewFile();
             writePlaylist(file);
         } catch (IOException e) {
             e.printStackTrace();
         }
         this.name = file.getName();
+
         this.aktSong = 0;
         this.size = songs.size();
         this.shuffle = false;
@@ -39,9 +53,9 @@ public class Playlist {
     }
 
     /*
-    public Backend.Playlist (String name, String directory){
+    public Backend.list (String name, String directory){
 
-        //Erstellt neue Backend.Playlist mit gegebenem Namen und Verzeichnis
+        //Erstellt neue Backend.list mit gegebenem Namen und Verzeichnis
         this.file = new File(name);
         this.directory = new File(directory);
 
@@ -57,14 +71,10 @@ public class Playlist {
 
     //ERSTELLEN + FÜLLEN DER DATEI
 
-    public void createFile(File file) throws IOException{
-        file.createNewFile();
-
-    }
-
     public void writePlaylist(File file) throws IOException{
         if (songs !=null){
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
+
             for (int i=0; i<songs.size(); i++){
                 writer.write(songs.get(i).toString());
                 writer.newLine();
@@ -73,10 +83,22 @@ public class Playlist {
         }
     }
 
-    public HashMap<Integer, Mp3File> fileToMp3Hash(File[] files){
-        HashMap<Integer, Mp3File> content = new HashMap<>();
-        for (int i=0; i<files.length; i++){
-            try {
+    public ArrayList<Track> fileToTrackArrayList (File[] files){
+        //HashMap<Integer, Mp3File> content = new HashMap<>();
+        ArrayList<Track> content = new ArrayList<>();
+
+        if (files != null) {
+            for (int i = 0; i < files.length; i++) {
+                try {
+                    content.add(new Track(new Mp3File(files[i])));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedTagException e) {
+                    e.printStackTrace();
+                } catch (InvalidDataException e) {
+                    e.printStackTrace();
+                }
+            /*try {
                 content.put(i, new Mp3File(files[i]));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -84,9 +106,11 @@ public class Playlist {
                 e.printStackTrace();
             } catch (InvalidDataException e) {
                 e.printStackTrace();
+            }*/
             }
+            return content;
         }
-        return content;
+        return null;
     }
 
     public void skipToNextSong(){
@@ -95,6 +119,7 @@ public class Playlist {
         }
         else if (shuffle) {
             aktSong = (int)(Math.random()* songs.size());
+            //aktSong = songs.get((int)(Math.random()* size));
 
             return;
         }
@@ -148,13 +173,22 @@ public class Playlist {
         return this.name;
     }
 
-    public Mp3File getAktSong(){
+    public Track getAktSong(){
         return songs.get(aktSong);
     }
 
-    public Mp3File getSong(int i){
-       return songs.get(i);
+    public ArrayList<Track> getAll() {
+        return this.songs;
     }
+
+    public ArrayList<Track> getSongs() {
+        return this.songs;
+    }
+
+    public Track getSong(int i){
+        return songs.get(i);
+    }
+
 
     public boolean isShuffle(){
         return shuffle;

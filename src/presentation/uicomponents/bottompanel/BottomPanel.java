@@ -15,14 +15,13 @@ public class BottomPanel extends StackPane {
     private Mp3Player player;
     private PlaylistManager manager;
 
-    Pane playercontrol;
+    public PlayerControl playercontrol;
 
     public BottomPanel(Playlist defPlaylist, Mp3Player player, PlaylistManager manager) {
         this.defPlaylist = defPlaylist;
         this.player = player;
         this.manager = manager;
         playercontrol = new PlayerControl(defPlaylist, player, manager);
-
 
         this.setMinSize(1000, 60);
         this.setMaxHeight(60);

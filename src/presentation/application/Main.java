@@ -1,13 +1,13 @@
 package presentation.application;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.scenes.playerview.PlayerView;
+import presentation.scenes.playerview.PlayerViewController;
+import presentation.scenes.playlistview.PlayListViewController;
+import presentation.uicomponents.toppanel.TopPanel;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
@@ -16,34 +16,30 @@ public class Main extends Application {
     private Playlist defPlaylist;
     private PlaylistManager manager;
     private Mp3Player player;
-
-
-
+    private PlayerViewController playerViewController;
+    private PlayListViewController playListViewController;
     Stage primaryStage;
-    Pane playerView, playlistView;
 
     @Override
     public void init(){
-        this.defPlaylist = new Playlist();
-        this.manager = new PlaylistManager(defPlaylist);
-        this.player = new Mp3Player(manager.getAktPlaylist().getAktSong());
 
+        defPlaylist = new Playlist();
+        manager = new PlaylistManager(defPlaylist);
+        player = new Mp3Player(manager.getAktPlaylist().getAktSong().getSong());
+        playerViewController = new PlayerViewController(player,defPlaylist,manager,this);
+        playListViewController = new PlayListViewController(defPlaylist,player,manager,this);
     }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
-
-        this.playerView = new PlayerView(defPlaylist, player, manager);
         this.primaryStage = primaryStage;
-
 
         Pane root = new Pane();
         root.setStyle("-fx-background-color: transparent;");
 
         //switchView("PLAYER");
         Scene scene = new Scene(root, 1000, 750);
-        scene.setRoot(playerView);
+        scene.setRoot(playerViewController.getView());
 
         scene.getStylesheets().add(getClass().
                 getResource("application.css").toExternalForm());
@@ -56,12 +52,14 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    private void switchView(String name) {
+    public void switchView(String name) {
         Scene scene = primaryStage.getScene();
         switch (name) {
             case "PLAYER":
-                scene.setRoot(playerView);
+                scene.setRoot(playerViewController.getView());
                 break;
+            case "LIST":
+                scene.setRoot(playListViewController.getView());
         }
     }
 

@@ -1,11 +1,14 @@
 package structure;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class PlaylistManager {
 
     private Playlist aktuell;
-    private HashMap<String, Playlist> playlists = new HashMap<>();
+    //private HashMap<String, Playlist> playlists = new HashMap<>();
+
+    private ArrayList<Playlist> playlists = new ArrayList<>();
 
 /*
     public Backend.PlaylistManager (){
@@ -17,7 +20,7 @@ public class PlaylistManager {
 
     public  PlaylistManager (Playlist playlist){
         this.aktuell=playlist;
-        this.playlists.put(playlist.getName(), playlist);
+        this.playlists.add(playlist);
     }
 
     //GETTER
@@ -49,13 +52,13 @@ public class PlaylistManager {
     }
 
     public void songInfo(){
-        System.out.println("Aktueller Song: "+aktuell.getAktSong().getFilename());
+        System.out.println("Aktueller Song: "+aktuell.getAktSong().getName());
     }
 
 
 
     public void savePlaylist(Playlist playlist){
-        this.playlists.put(playlist.getName(), playlist);
+        this.playlists.add(playlist);
     }
 
     public void deletePlaylist(Playlist playlist){

@@ -18,8 +18,11 @@ import structure.PlaylistManager;
 import java.io.IOException;
 
 public class PlayerView extends BorderPane {
-    Pane toppanel, bottompanel, sidepanelLeft, sidepanelRight, playercontent;
-
+    TopPanel topPanel;
+    SidePanel sidePanelLeft;
+    SidePanel sidePanelRight;
+    PlayerContent playerContent;
+    BottomPanel bottomPanel;
     private Playlist defPlaylist;
     private Mp3Player player;
     private PlaylistManager manager;
@@ -30,18 +33,17 @@ public class PlayerView extends BorderPane {
         this.player = player;
         this.manager = manager;
 
-        toppanel = new TopPanel();
-        bottompanel = new BottomPanel(defPlaylist, player, manager);
-        sidepanelLeft = new SidePanel();
-        sidepanelRight = new SidePanel();
-        playercontent = new PlayerContent(defPlaylist, player, manager);
+        this.topPanel = new TopPanel();
+        this.bottomPanel = new BottomPanel(defPlaylist, player, manager);
+        this.sidePanelLeft = new SidePanel();
+        this.sidePanelRight = new SidePanel();
+        this.playerContent = new PlayerContent(defPlaylist, player, manager);
 
-
-        this.setTop(toppanel);
-        this.setBottom(bottompanel);
-        this.setLeft(sidepanelLeft);
-        this.setRight(sidepanelRight);
-        this.setCenter(playercontent);
+        this.setTop(topPanel);
+        this.setBottom(bottomPanel);
+        this.setLeft(sidePanelLeft);
+        this.setRight(sidePanelRight);
+        this.setCenter(playerContent);
 
 
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

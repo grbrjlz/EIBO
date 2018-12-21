@@ -3,9 +3,9 @@ package presentation.uicomponents.playercontrol;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.control.Button;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
@@ -15,7 +15,12 @@ public class PlayerControl extends HBox {
     private PlaylistManager manager;
     private Playlist defPlaylist;
 
-    Button play, stop, skip, back, shuffle, repeat;
+    public Button play;
+    public Button stop;
+    public Button skip;
+    private Button back;
+    private Button shuffle;
+    private Button repeat;
 
     public PlayerControl(Playlist defPlaylist, Mp3Player player, PlaylistManager manager){
         this.defPlaylist = defPlaylist;

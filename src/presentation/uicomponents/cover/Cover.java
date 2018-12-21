@@ -27,8 +27,8 @@ public class Cover extends StackPane {
         ImageView iv1 = new ImageView();
 
         try {
-            if (defPlaylist.getAktSong().hasId3v2Tag()){
-                ID3v2 id3v2Tag = defPlaylist.getAktSong().getId3v2Tag();
+            if (defPlaylist.getAktSong().getSong().hasId3v2Tag()){
+                ID3v2 id3v2Tag = defPlaylist.getAktSong().getSong().getId3v2Tag();
                 byte[] cover = id3v2Tag.getAlbumImage();
 
                 if (cover!=null) {
