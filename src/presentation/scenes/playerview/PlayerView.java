@@ -23,21 +23,16 @@ public class PlayerView extends BorderPane {
     SidePanel sidePanelRight;
     PlayerContent playerContent;
     BottomPanel bottomPanel;
-    private Playlist defPlaylist;
     private Mp3Player player;
-    private PlaylistManager manager;
 
 
-    public PlayerView(Playlist defPlaylist, Mp3Player player, PlaylistManager manager) {
-        this.defPlaylist = defPlaylist;
+    public PlayerView(Mp3Player player) {
         this.player = player;
-        this.manager = manager;
-
         this.topPanel = new TopPanel();
-        this.bottomPanel = new BottomPanel(defPlaylist, player, manager);
+        this.bottomPanel = new BottomPanel(player);
         this.sidePanelLeft = new SidePanel();
         this.sidePanelRight = new SidePanel();
-        this.playerContent = new PlayerContent(defPlaylist, player, manager);
+        this.playerContent = new PlayerContent(player);
 
         this.setTop(topPanel);
         this.setBottom(bottomPanel);
@@ -48,7 +43,23 @@ public class PlayerView extends BorderPane {
 
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
-
     }
 
+    public TopPanel getTopPanel(){
+        return this.topPanel;
+    }
+
+    public BottomPanel getBottomPanel(){
+        return this.bottomPanel;
+    }
+
+    public PlayerContent getPlayerContent() {
+        return this.playerContent;
+    }
+
+    public void setPlayerContent(PlayerContent content){
+        this.playerContent = content;
+        this.setCenter(playerContent);
+
+    }
 }

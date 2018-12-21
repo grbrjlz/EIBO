@@ -2,14 +2,10 @@
     -fx-font-family: 'DejaVu Sans Mono', monospace;
 }
 
-#song {
-    -fx-font-size: 25;
-}
-
-#artist {
+#title {
     -fx-font-size: 20;
 }
 
-#playlist {
-    -fx-font-size: 16;
+#artist {
+    -fx-font-size: 15;
 }

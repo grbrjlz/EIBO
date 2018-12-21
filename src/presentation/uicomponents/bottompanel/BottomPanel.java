@@ -11,25 +11,23 @@ import structure.PlaylistManager;
 
 public class BottomPanel extends StackPane {
 
-    private Playlist defPlaylist;
     private Mp3Player player;
-    private PlaylistManager manager;
-
     public PlayerControl playercontrol;
 
-    public BottomPanel(Playlist defPlaylist, Mp3Player player, PlaylistManager manager) {
-        this.defPlaylist = defPlaylist;
+    public BottomPanel(Mp3Player player) {
         this.player = player;
-        this.manager = manager;
-        playercontrol = new PlayerControl(defPlaylist, player, manager);
+        playercontrol = new PlayerControl(player);
 
         this.setMinSize(1000, 60);
         this.setMaxHeight(60);
         this.setStyle("-fx-background-color: #2E2E30;");
         this.getChildren().add(playercontrol);
 
-        //this.setAlignment(Pos.BASELINE_CENTER);
         //this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+    }
+
+    public PlayerControl getPlayercontrol(){
+        return this.playercontrol;
     }
 
 }

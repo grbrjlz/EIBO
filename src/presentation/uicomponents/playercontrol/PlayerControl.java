@@ -12,8 +12,6 @@ import structure.PlaylistManager;
 
 public class PlayerControl extends HBox {
     private Mp3Player player;
-    private PlaylistManager manager;
-    private Playlist defPlaylist;
 
     public Button play;
     public Button stop;
@@ -22,10 +20,8 @@ public class PlayerControl extends HBox {
     private Button shuffle;
     private Button repeat;
 
-    public PlayerControl(Playlist defPlaylist, Mp3Player player, PlaylistManager manager){
-        this.defPlaylist = defPlaylist;
+    public PlayerControl(Mp3Player player){
         this.player = player;
-        this.manager = manager;
 
         back = new Button();
         back.getStyleClass().addAll("icon-button");

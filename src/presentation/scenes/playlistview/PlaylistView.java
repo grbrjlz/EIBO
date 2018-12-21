@@ -28,12 +28,12 @@ class PlaylistView extends BorderPane {
         this.player = player;
         this.manager = manager;
         this.topPanel = new TopPanel();
-        this.bottomPanel = new BottomPanel(defPlaylist, player, manager);
+        this.bottomPanel = new BottomPanel(player);
         this.sidePanelLeft = new SidePanel();
         this.sidePanelRight = new SidePanel();
 
         //listView = new ListViewModel(defPlaylist);
-        playerControl = new PlayerControl(defPlaylist,player,manager);
+        playerControl = new PlayerControl(player);
 
         this.setTop(topPanel);
         this.setBottom(bottomPanel);

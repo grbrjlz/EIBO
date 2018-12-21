@@ -7,9 +7,10 @@ public class Mp3Player {
 
     SimpleMinim minim = new SimpleMinim(true);
     SimpleAudioPlayer player;
-    //Mp3File aktSong;
 
     int aktSong, playlistSize;
+    boolean shuffle, repeat;
+
     Playlist aktPlaylist;
 
     public Mp3Player(Playlist aktPlaylist){
@@ -17,11 +18,6 @@ public class Mp3Player {
         this.aktSong = 0;
         this.playlistSize = aktPlaylist.getSize();
         this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
-
-    }
-
-    public void setAktSong(int song){
-        this.aktSong = song;
     }
 
     //PLAYERCONTROL-METHODEN
@@ -72,28 +68,17 @@ public class Mp3Player {
 
     }
 
-    /*public void info() {
-        System.out.println("Dateiname: " + aktSong.getFilename());
-            System.out.println("Länge: " + aktSong.getLengthInSeconds() + " Sekunden");
-            System.out.println("Bitrate: " + aktSong.getBitrate() + " kbps");
-            if (aktSong.hasId3v1Tag()) {
-                ID3v1 id3v1Tag = aktSong.getId3v1Tag();
-                System.out.println("Track: " + id3v1Tag.getTrack());
-                System.out.println("Artist: " + id3v1Tag.getArtist());
-                System.out.println("Title: " + id3v1Tag.getTitle());
-                System.out.println("Album: " + id3v1Tag.getAlbum());
-                System.out.println("Year: " + id3v1Tag.getYear());
-                System.out.println("Genre: " + id3v1Tag.getGenre() + " (" + id3v1Tag.getGenreDescription() + ")");
-                System.out.println("Comment: " + id3v1Tag.getComment());
-            } else System.out.println("keine Id3v1 Tags vorhanden!");
-            if (aktSong.hasId3v2Tag()) {
-                ID3v2 id3v2tag = aktSong.getId3v2Tag();
-                System.out.println("BPM "+id3v2tag.getBPM());
-                System.out.println("Key "+id3v2tag.getKey());
+    public Track getAktTrack(){
+        return aktPlaylist.getSong(aktSong);
+    }
 
-            }
+    public void setAktSong(int song){
+        this.aktSong = song;
+    }
 
-    }*/
+    public String getAktPlaylistName(){
+        return this.aktPlaylist.getName();
+    }
 
     public byte[] getCover() {
         return aktPlaylist.getSong(aktSong).getCover();

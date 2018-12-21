@@ -1,34 +1,37 @@
 package presentation.uicomponents.playercontent;
 
+import javafx.geometry.Pos;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import presentation.uicomponents.cover.Cover;
+import presentation.uicomponents.songinfo.SongInfo;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
 
-public class PlayerContent extends StackPane {
-    private Pane cover;
+public class PlayerContent extends VBox {
+    private Cover cover;
+    private SongInfo songinfo;
 
-    private Playlist defPlaylist;
     private Mp3Player player;
-    private PlaylistManager manager;
 
-    public PlayerContent(Playlist defPlaylist, Mp3Player player, PlaylistManager manager){
-        this.defPlaylist = defPlaylist;
+    public PlayerContent(Mp3Player player){
         this.player = player;
-        this.manager = manager;
+        this.cover = new Cover(player.getAktTrack());
+        this.songinfo = new SongInfo(player.getAktTrack());
+
+        this.setAlignment(Pos.CENTER);
         this.setMinHeight(520);
         this.setMinWidth(760);
         this.setPrefWidth(760);
         this.setPrefHeight(520);
         this.setStyle("-fx-background-color: #D8D8D8;");
-
-        cover = new Cover(defPlaylist, player, manager);
-        this.getChildren().add(cover);
+        this.getChildren().addAll(cover, songinfo);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
 
     }
+
+
 }

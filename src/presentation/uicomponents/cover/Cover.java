@@ -10,32 +10,24 @@ import javafx.scene.layout.StackPane;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
+import structure.Track;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
 public class Cover extends StackPane {
-    private Playlist defPlaylist;
-    private Mp3Player player;
-    private PlaylistManager manager;
+    private Track aktTrack;
     private Image img;
 
-    public Cover(Playlist defPlaylist, Mp3Player player, PlaylistManager manager) {
-        this.defPlaylist = defPlaylist;
-        this.player = player;
-        this.manager = manager;
+    public Cover(Track aktTrack) {
+        this.aktTrack = aktTrack;
         ImageView iv1 = new ImageView();
 
         try {
-            if (defPlaylist.getAktSong().getSong().hasId3v2Tag()){
-                ID3v2 id3v2Tag = defPlaylist.getAktSong().getSong().getId3v2Tag();
-                byte[] cover = id3v2Tag.getAlbumImage();
-
-                if (cover!=null) {
-                    img = new Image(new ByteArrayInputStream(cover));
-                }
+            if (aktTrack.getCover() != null){
+                byte[] cover = aktTrack.getCover();
+                img = new Image(new ByteArrayInputStream(cover));
                 iv1.setImage(img);
-
             }
         } catch (Exception e){
             e.printStackTrace();
@@ -46,9 +38,6 @@ public class Cover extends StackPane {
 
         this.setAlignment(Pos.CENTER);
         this.getChildren().addAll(iv1);
-
-
-
 
     }
 

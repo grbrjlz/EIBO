@@ -8,25 +8,33 @@ import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import presentation.uicomponents.viewcontrol.ViewControl;
 
-public class TopPanel extends HBox {
+public class TopPanel extends StackPane {
 
     private String toggleString;
-    public Button switchPlayer;
-    public Button switchList;
+
+    private ViewControl viewcontrol;
 
 
     public TopPanel() {
 
-        //this.setAlignment(Pos.TOP_CENTER);
         this.setMinSize(1000, 60);
         this.setMaxHeight(60);
         this.setStyle("-fx-background-color: #2E2E30;");
 
-        switchPlayer = new Button("PLAYER");
+        this.viewcontrol = new ViewControl();
+        this.getChildren().addAll(viewcontrol);
+
+        /*switchPlayer = new Button("PLAYER");
         switchPlayer.setUserData("PLAYER");
         switchList = new Button("LIST");
-        this.getChildren().addAll(switchPlayer,switchList);
+        this.getChildren().addAll(switchPlayer,switchList);*/
+    }
+
+    public ViewControl getViewcontrol(){
+        return this.viewcontrol;
     }
 
 }

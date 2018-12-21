@@ -34,8 +34,8 @@ public class PlayListViewController {
         this.player = player;
         this.listView = view.listView;
         this.topPanel = view.topPanel;
-        this.switchList = view.topPanel.switchList;
-        this.switchPlayer = view.topPanel.switchPlayer;
+        //this.switchList = view.topPanel.switchList;
+        //this.switchPlayer = view.topPanel.switchPlayer;
         this.application = application;
         this.bottomPanel = view.bottomPanel;
         this.pc = bottomPanel.playercontrol;
@@ -53,8 +53,8 @@ public class PlayListViewController {
             player.stop();
             isPlaying = false;
         });
-        switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
-        switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
+        //switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
+        //switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
     }
 
     public PlaylistView getView() {

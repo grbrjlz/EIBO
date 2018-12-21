@@ -28,7 +28,7 @@ public class Main extends Application {
 
         player = new Mp3Player(defPlaylist);
 
-        playerViewController = new PlayerViewController(player,defPlaylist,manager,this);
+        playerViewController = new PlayerViewController(player, this);
         playListViewController = new PlayListViewController(defPlaylist,player,manager,this);
     }
 

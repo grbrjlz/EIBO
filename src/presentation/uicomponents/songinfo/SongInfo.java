@@ -7,31 +7,24 @@ import javafx.scene.layout.VBox;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
+import structure.Track;
 
 public class SongInfo extends VBox {
 
-    private Playlist defPlaylist;
-    private Mp3Player player;
-    private PlaylistManager manager;
+    private Track track;
 
-    public SongInfo (Playlist defPlaylist, Mp3Player player, PlaylistManager manager){
-        this.defPlaylist = defPlaylist;
-        this.player = player;
-        this.manager = manager;
+    public SongInfo (Track track){
+        this.track = track;
 
-        Label songname = new Label(player.getAktName());
-        songname.setId("song");
+        Label title = new Label(track.getTitle());
+        title.setId("title");
 
-        Label artistname = new Label(player.getAktArtist());
-        artistname.setId("artist");
-
-        Label playlistname = new Label(manager.getAktPlaylist().getName());
-        playlistname.setId("playlist");
-
+        Label artist = new Label(track.getArtist());
+        artist.setId("artist");
 
         this.setAlignment(Pos.BOTTOM_CENTER);
         this.setPadding(new Insets(20));
-        this.getChildren().addAll(songname, artistname, playlistname);
+        this.getChildren().addAll(title, artist);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
 
