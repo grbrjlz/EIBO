@@ -48,6 +48,9 @@ public class PlayerViewController {
             if (!isPlaying) {
                 player.play();
                 isPlaying = true;
+            } else {
+                player.pause();
+                isPlaying = false;
             }
         });
         pc.stop.addEventHandler(ActionEvent.ACTION, e -> {

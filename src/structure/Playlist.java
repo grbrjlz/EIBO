@@ -27,7 +27,7 @@ public class Playlist {
 
     public Playlist (){
         //Erstellt default-list mit allen vorhandenen Songs in default Directory
-        songs = new ArrayList<Track>();
+        songs = new ArrayList<>();
 
         File file = new File("default.m3u");
         File directory = new File("./songs");
@@ -71,31 +71,27 @@ public class Playlist {
 
     //ERSTELLEN + FÜLLEN DER DATEI
 
-    public void writePlaylist(File file) throws IOException{
+    private void writePlaylist(File file) throws IOException{
         if (songs !=null){
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
-            for (int i=0; i<songs.size(); i++){
-                writer.write(songs.get(i).toString());
+            for (Track song : songs) {
+                writer.write(song.toString());
                 writer.newLine();
             }
             writer.close();
         }
     }
 
-    public ArrayList<Track> fileToTrackArrayList (File[] files){
+    private ArrayList<Track> fileToTrackArrayList(File[] files){
         //HashMap<Integer, Mp3File> content = new HashMap<>();
         ArrayList<Track> content = new ArrayList<>();
 
         if (files != null) {
-            for (int i = 0; i < files.length; i++) {
+            for (File file : files) {
                 try {
-                    content.add(new Track(new Mp3File(files[i])));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (UnsupportedTagException e) {
-                    e.printStackTrace();
-                } catch (InvalidDataException e) {
+                    content.add(new Track(new Mp3File(file)));
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             /*try {
@@ -113,7 +109,7 @@ public class Playlist {
         return null;
     }
 
-    public void skipToNextSong(){
+    void skipToNextSong(){
         if (repeat)  {
             return;
         }
@@ -133,9 +129,8 @@ public class Playlist {
 
     }
 
-    public void skipToPrevSong(){
+    void skipToPrevSong(){
         if (repeat)  {
-            return;
         }
         else if (shuffle) {
             aktSong = (int)(Math.random()* songs.size());
@@ -154,13 +149,11 @@ public class Playlist {
     //SETTER + TOGGLER
 
     public void toggleShuffle(){
-        if (!shuffle) shuffle = true;
-        else shuffle = false;
+        shuffle = !shuffle;
     }
 
     public void toggleRepeat(){
-        if (!repeat) repeat = true;
-        else repeat = false;
+        repeat = !repeat;
     }
 
     public void setAktSong(int i){
