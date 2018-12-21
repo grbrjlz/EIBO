@@ -1,32 +1,22 @@
 package presentation.scenes.playerview;
 
-import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.layout.*;
 import presentation.uicomponents.bottompanel.BottomPanel;
-import presentation.uicomponents.cover.Cover;
 import presentation.uicomponents.playercontent.PlayerContent;
-import presentation.uicomponents.playercontrol.PlayerControl;
 import presentation.uicomponents.sidepanel.SidePanel;
 import presentation.uicomponents.toppanel.TopPanel;
 import structure.Mp3Player;
-import structure.Playlist;
-import structure.PlaylistManager;
 
-import java.io.IOException;
-
-public class PlayerView extends BorderPane {
-    TopPanel topPanel;
-    SidePanel sidePanelLeft;
-    SidePanel sidePanelRight;
-    PlayerContent playerContent;
-    BottomPanel bottomPanel;
+class PlayerView extends BorderPane {
+    private TopPanel topPanel;
+    private SidePanel sidePanelLeft;
+    private SidePanel sidePanelRight;
+    private PlayerContent playerContent;
+    private BottomPanel bottomPanel;
     private Mp3Player player;
 
 
-    public PlayerView(Mp3Player player) {
+    PlayerView(Mp3Player player) {
         this.player = player;
         this.topPanel = new TopPanel();
         this.bottomPanel = new BottomPanel(player);
@@ -45,19 +35,19 @@ public class PlayerView extends BorderPane {
 
     }
 
-    public TopPanel getTopPanel(){
+    TopPanel getTopPanel(){
         return this.topPanel;
     }
 
-    public BottomPanel getBottomPanel(){
+    BottomPanel getBottomPanel(){
         return this.bottomPanel;
     }
 
-    public PlayerContent getPlayerContent() {
+    PlayerContent getPlayerContent() {
         return this.playerContent;
     }
 
-    public void setPlayerContent(PlayerContent content){
+    void setPlayerContent(PlayerContent content){
         this.playerContent = content;
         this.setCenter(playerContent);
 

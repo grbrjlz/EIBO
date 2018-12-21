@@ -1,14 +1,10 @@
 package presentation.uicomponents.playercontrol;
 
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.control.Button;
 import structure.Mp3Player;
-import structure.Playlist;
-import structure.PlaylistManager;
 
 public class PlayerControl extends HBox {
     private Mp3Player player;

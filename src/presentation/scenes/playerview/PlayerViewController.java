@@ -2,7 +2,6 @@ package presentation.scenes.playerview;
 
 import javafx.event.ActionEvent;
 import presentation.application.Main;
-import presentation.uicomponents.cover.Cover;
 import presentation.uicomponents.playercontent.PlayerContent;
 import presentation.uicomponents.playercontrol.PlayerControl;
 import presentation.uicomponents.viewcontrol.ViewControl;
@@ -36,7 +35,7 @@ public class PlayerViewController {
         initialize();
     }
 
-    public void initialize(){
+    private void initialize(){
         playerControl.play.addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();

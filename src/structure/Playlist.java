@@ -1,8 +1,6 @@
 package structure;
 
-import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
-import com.mpatric.mp3agic.UnsupportedTagException;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -10,7 +8,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 
 public class Playlist {
     private String name;
@@ -92,11 +89,11 @@ public class Playlist {
 
     //GETTER
 
-    public String getName(){
+    String getName(){
         return this.name;
     }
 
-    public Track getAktSong(){
+    Track getAktSong(){
         return songs.get(aktSong);
     }
 
@@ -108,7 +105,7 @@ public class Playlist {
         return this.songs;
     }
 
-    public String getSongName(int i){
+    String getSongName(int i){
         return songs.get(i).getName();
     }
 
@@ -116,19 +113,19 @@ public class Playlist {
         return songs.get(i).getSong();
     }
 
-    public Track getSong(int i){
+    Track getSong(int i){
         return songs.get(i);
     }
 
-    public int getSize(){
+    int getSize(){
         return songs.size();
     }
 
-    public boolean isShuffle(){
+    boolean isShuffle(){
         return shuffle;
     }
 
-    public boolean isRepeat() {
+    boolean isRepeat() {
         return repeat;
     }
 }

@@ -5,13 +5,14 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 
 public class Mp3Player {
 
-    SimpleMinim minim = new SimpleMinim(true);
-    SimpleAudioPlayer player;
+    private SimpleMinim minim = new SimpleMinim(true);
+    private SimpleAudioPlayer player;
 
-    int aktSong, playlistSize;
+    private int aktSong;
+    private int playlistSize;
     boolean shuffle, repeat;
 
-    Playlist aktPlaylist;
+    private Playlist aktPlaylist;
 
     public Mp3Player(Playlist aktPlaylist){
         this.aktPlaylist = aktPlaylist;

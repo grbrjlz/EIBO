@@ -7,7 +7,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import presentation.scenes.playerview.PlayerViewController;
 import presentation.scenes.playlistview.PlayListViewController;
-import presentation.uicomponents.toppanel.TopPanel;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
@@ -18,7 +17,7 @@ public class Main extends Application {
     private Mp3Player player;
     private PlayerViewController playerViewController;
     private PlayListViewController playListViewController;
-    Stage primaryStage;
+    private Stage primaryStage;
 
     @Override
     public void init(){
@@ -33,7 +32,7 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
         Pane root = new Pane();

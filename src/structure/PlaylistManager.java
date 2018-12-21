@@ -1,7 +1,6 @@
 package structure;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class PlaylistManager {
 
@@ -26,9 +25,9 @@ public class PlaylistManager {
     //GETTER
 
     public Playlist getPlaylist (String playlistname){
-        for (int i=0; i<playlists.size(); i++) {
-            if (playlists.get(i).toString().equalsIgnoreCase(playlistname)) {
-                return playlists.get(i);
+        for (Playlist playlist : playlists) {
+            if (playlist.toString().equalsIgnoreCase(playlistname)) {
+                return playlist;
             }
         }
         return null;

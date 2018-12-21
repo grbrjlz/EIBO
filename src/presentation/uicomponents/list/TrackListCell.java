@@ -8,7 +8,7 @@ import javafx.scene.layout.VBox;
 import structure.Mp3Player;
 import structure.Track;
 
-public class TrackListCell extends ListCell<Track> {
+class TrackListCell extends ListCell<Track> {
     private HBox root;
     private VBox infoPane;
     private Label titleLabel;

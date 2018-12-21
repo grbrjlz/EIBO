@@ -4,9 +4,6 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
-import structure.Mp3Player;
-import structure.Playlist;
-import structure.PlaylistManager;
 import structure.Track;
 
 public class SongInfo extends VBox {

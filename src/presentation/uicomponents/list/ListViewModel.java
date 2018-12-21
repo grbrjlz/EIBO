@@ -9,7 +9,7 @@ import structure.Playlist;
 import structure.Track;
 import java.util.List;
 
-public class ListViewModel extends StackPane {
+class ListViewModel extends StackPane {
 
 
     private ListView<Track> playlist;

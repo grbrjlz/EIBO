@@ -2,8 +2,6 @@ package presentation.scenes.playlistview;
 
 import javafx.event.ActionEvent;
 import javafx.scene.control.Button;
-import javafx.scene.control.ToggleButton;
-import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import presentation.application.Main;
 import presentation.uicomponents.bottompanel.BottomPanel;
@@ -42,7 +40,7 @@ public class PlayListViewController {
         initialize();
     }
 
-    public void initialize() {
+    private void initialize() {
         pc.play.addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
