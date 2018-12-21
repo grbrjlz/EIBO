@@ -14,12 +14,9 @@ import java.util.HashMap;
 
 public class Playlist {
     private String name;
-    //private HashMap<Integer, Track> songs;
     private ArrayList<Track> songs;
 
     private int aktSong, size;
-    //private Track aktSong;
-    //private int size;
 
     private boolean shuffle, repeat;
 
@@ -51,23 +48,6 @@ public class Playlist {
         this.repeat = false;
 
     }
-
-    /*
-    public Backend.list (String name, String directory){
-
-        //Erstellt neue Backend.list mit gegebenem Namen und Verzeichnis
-        this.file = new File(name);
-        this.directory = new File(directory);
-
-        try {
-            createFile(file);
-            writePlaylist();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
-    */
 
     //ERSTELLEN + FÜLLEN DER DATEI
 
@@ -109,56 +89,6 @@ public class Playlist {
         return null;
     }
 
-    void skipToNextSong(){
-        if (repeat)  {
-            return;
-        }
-        else if (shuffle) {
-            aktSong = (int)(Math.random()* songs.size());
-            //aktSong = songs.get((int)(Math.random()* size));
-
-            return;
-        }
-        else {
-            if (aktSong<(size-1)){
-                aktSong++;
-            } else if (aktSong == (size-1)){
-                aktSong = 0;
-            }
-        }
-
-    }
-
-    void skipToPrevSong(){
-        if (repeat)  {
-        }
-        else if (shuffle) {
-            aktSong = (int)(Math.random()* songs.size());
-            return;
-        }
-        else {
-            if (aktSong == (0)) {
-                aktSong = (size - 1);
-            }
-            else if (aktSong<size){
-                aktSong--;
-            }
-        }
-    }
-
-    //SETTER + TOGGLER
-
-    public void toggleShuffle(){
-        shuffle = !shuffle;
-    }
-
-    public void toggleRepeat(){
-        repeat = !repeat;
-    }
-
-    public void setAktSong(int i){
-        this.aktSong = i;
-    }
 
     //GETTER
 
@@ -190,6 +120,9 @@ public class Playlist {
         return songs.get(i);
     }
 
+    public int getSize(){
+        return songs.size();
+    }
 
     public boolean isShuffle(){
         return shuffle;

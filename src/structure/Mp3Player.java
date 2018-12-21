@@ -1,67 +1,61 @@
 package structure;
 
-import com.mpatric.mp3agic.ID3v1;
-import com.mpatric.mp3agic.ID3v2;
-import com.mpatric.mp3agic.Mp3File;
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
-
-import javax.imageio.IIOException;
-import javax.imageio.ImageIO;
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.IOException;
-import java.io.InputStream;
 
 public class Mp3Player {
 
     SimpleMinim minim = new SimpleMinim(true);
-    SimpleAudioPlayer audioPlayer;
+    SimpleAudioPlayer player;
     //Mp3File aktSong;
 
-    int aktSong;
+    int aktSong, playlistSize;
     Playlist aktPlaylist;
 
     public Mp3Player(Playlist aktPlaylist){
-        this.aktSong = 0;
         this.aktPlaylist = aktPlaylist;
+        this.aktSong = 0;
+        this.playlistSize = aktPlaylist.getSize();
+        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+
     }
 
-    /*public void setAktSong(Mp3File song){
+    public void setAktSong(int song){
         this.aktSong = song;
-    }*/
+    }
 
+    //PLAYERCONTROL-METHODEN
     public void play(){
-        this.audioPlayer = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
-        audioPlayer.play();
+        player.play();
     }
-
-/*
-    public void play(Mp3File song) {
-        this.aktSong = song;
-        this.audioPlayer = minim.loadMP3File(aktSong.getFilename());
-        audioPlayer.play();
-    }
-
-
-    public void play(String filename) {
-        this.audioPlayer = minim.loadMP3File(filename);
-        audioPlayer.play();
-    }
-    */
 
     public void pause() {
-        audioPlayer.pause();
+        player.pause();
     }
 
     public void stop() {
-        audioPlayer.pause();
-        audioPlayer.rewind();
+        player.pause();
+        player.rewind();
     }
 
     public void skip() {
+        player.pause();
+
+        if (aktSong == (playlistSize-1)) aktSong = 0;
+        else aktSong++;
+
+        player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+        player.play();
+    }
+
+    public void back() {
+        player.pause();
+
+        if (aktSong == 0) aktSong = (playlistSize-1);
+        else aktSong--;
+
+        player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+        player.play();
 
     }
 
@@ -107,7 +101,7 @@ public class Mp3Player {
     }
 
     public void volume(float value) {
-        audioPlayer.setGain(value);
+        player.setGain(value);
     }
 
     /*public String getAktSongInfo(){

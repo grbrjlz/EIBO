@@ -60,12 +60,12 @@ public class PlayerViewController {
         });
 
         pc.skip.addEventHandler(ActionEvent.ACTION, e -> {
-            player.stop();
+            player.skip();
 
         });
 
         pc.back.addEventHandler(ActionEvent.ACTION, e -> {
-            player.stop();
+            player.back();
         });
 
         switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
