@@ -9,10 +9,10 @@ import structure.Mp3Player;
 public class PlayerControl extends HBox {
     private Mp3Player player;
 
-    public Button play;
-    public Button stop;
-    public Button skip;
-    public Button back;
+    private Button play;
+    private Button stop;
+    private Button skip;
+    private Button back;
     private Button shuffle;
     private Button repeat;
 
@@ -20,38 +20,55 @@ public class PlayerControl extends HBox {
         this.player = player;
 
         back = new Button();
-        back.getStyleClass().addAll("icon-button");
-        back.setId("back-button");
+        back.setId("back");
 
         play = new Button();
-        play.getStyleClass().addAll("icon-button");
-        play.setId("play-button");
+        play.setId("play");
 
         stop = new Button();
-        stop.getStyleClass().addAll("icon-button");
-        stop.setId("stop-button");
+        stop.setId("stop");
 
         skip = new Button();
-        skip.getStyleClass().addAll("icon-button");
-        skip.setId("skip-button");
+        skip.setId("skip");
 
-        /*
-        shuffle = new Button("shuffle");
-        shuffle.getStyleClass().addAll("icon-button");
-        shuffle.setId("shuffle-button");
+        shuffle = new Button();
+        shuffle.setId("shuffle");
 
-        repeat = new Button("repeat");
-        repeat.getStyleClass().addAll("icon-button");
-        repeat.setId("repeat-button");
-        */
+        repeat = new Button();
+        repeat.setId("repeat");
+
 
 
 
         this.setSpacing(10);
         this.setPadding(new Insets(10));
         this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(back, play, stop, skip/*, shuffle, repeat*/);
+        this.getChildren().addAll(back, play, stop, skip, shuffle, repeat);
         this.getStylesheets().add(getClass().
                 getResource("style.css").toExternalForm());
+    }
+
+    public Button getBack() {
+        return this.back;
+    }
+
+    public Button getPlay() {
+        return this.play;
+    }
+
+    public Button getSkip() {
+        return this.skip;
+    }
+
+    public Button getRepeat() {
+        return this.repeat;
+    }
+
+    public Button getShuffle() {
+        return this.shuffle;
+    }
+
+    public Button getStop() {
+        return this.stop;
     }
 }

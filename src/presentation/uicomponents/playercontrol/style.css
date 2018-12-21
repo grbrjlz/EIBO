@@ -12,26 +12,38 @@
 }
 
 
-#back-button {
+#back {
     -fx-background-image: url("../../../assets/icons/skip.png");
     -fx-background-size: 15px;
 
 }
 
-#play-button {
+#play {
     -fx-background-image: url("../../../assets/icons/play.png");
     -fx-background-size: 15px;
 
 }
 
-#stop-button {
+#stop {
     -fx-background-image: url("../../../assets/icons/stop.png");
     -fx-background-size: 15px;
 
 }
 
-#skip-button {
+#skip {
     -fx-background-image: url("../../../assets/icons/end.png");
+    -fx-background-size: 15px;
+
+}
+
+#shuffle {
+    -fx-background-image: url("../../../assets/icons/shuffle.png");
+    -fx-background-size: 15px;
+
+}
+
+#repeat {
+    -fx-background-image: url("../../../assets/icons/repeat.png");
     -fx-background-size: 15px;
 
 }

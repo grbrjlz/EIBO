@@ -38,8 +38,14 @@ public class Mp3Player {
     public void skip() {
         player.pause();
 
-        if (aktSong == (playlistSize-1)) aktSong = 0;
-        else aktSong++;
+        if (!repeat){
+            if (!shuffle) {
+                if (aktSong == (playlistSize-1)) aktSong = 0;
+                else aktSong++;
+            } else {
+                aktSong = (int)(Math.random()*playlistSize);
+            }
+        }
 
         player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
         player.play();
@@ -48,12 +54,24 @@ public class Mp3Player {
     public void back() {
         player.pause();
 
-        if (aktSong == 0) aktSong = (playlistSize-1);
-        else aktSong--;
+        if (!repeat){
+            if (aktSong == 0) aktSong = (playlistSize-1);
+            else aktSong--;
+        }
 
         player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
         player.play();
 
+    }
+
+    public void shuffle(){
+        if (shuffle) shuffle = false;
+        else shuffle = true;
+    }
+
+    public void repeat(){
+        if (repeat) repeat = false;
+        else repeat = true;
     }
 
     public String getAktName() {

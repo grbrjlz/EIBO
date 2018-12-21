@@ -36,7 +36,7 @@ public class PlayerViewController {
     }
 
     private void initialize(){
-        playerControl.play.addEventHandler(ActionEvent.ACTION, e -> {
+        playerControl.getPlay().addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
                 isPlaying = true;
@@ -46,22 +46,31 @@ public class PlayerViewController {
             }
         });
 
-        playerControl.stop.addEventHandler(ActionEvent.ACTION, e -> {
+        playerControl.getStop().addEventHandler(ActionEvent.ACTION, e -> {
             player.stop();
             isPlaying = false;
         });
 
-        playerControl.skip.addEventHandler(ActionEvent.ACTION, e -> {
+        playerControl.getSkip().addEventHandler(ActionEvent.ACTION, e -> {
             player.skip();
             view.setPlayerContent(new PlayerContent(player));
         });
 
-        playerControl.back.addEventHandler(ActionEvent.ACTION, e -> {
+        playerControl.getBack().addEventHandler(ActionEvent.ACTION, e -> {
             player.back();
             view.setPlayerContent(new PlayerContent(player));
         });
 
+        playerControl.getShuffle().addEventHandler(ActionEvent.ACTION, e -> {
+            player.shuffle();
+        });
+
+        playerControl.getRepeat().addEventHandler(ActionEvent.ACTION, e -> {
+            player.repeat();
+        });
+
         viewControl.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
+
 
 
     }

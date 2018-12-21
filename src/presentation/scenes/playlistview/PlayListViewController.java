@@ -41,7 +41,7 @@ public class PlayListViewController {
     }
 
     private void initialize() {
-        pc.play.addEventHandler(ActionEvent.ACTION, e -> {
+        /*pc.play.addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
                 isPlaying = true;
@@ -52,7 +52,7 @@ public class PlayListViewController {
             isPlaying = false;
         });
         //switchPlayer.addEventFilter(ActionEvent.ACTION, e -> application.switchView("PLAYER"));
-        //switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));
+        //switchList.addEventFilter(ActionEvent.ACTION, e -> application.switchView("LIST"));*/
     }
 
     public PlaylistView getView() {
