@@ -9,21 +9,26 @@ import structure.Track;
 public class SongInfo extends VBox {
 
     private Track track;
+    private Label title, artist;
 
     public SongInfo (Track track){
         this.track = track;
 
-        Label title = new Label(track.getTitle());
+        title = new Label(track.getTitle());
         title.setId("title");
 
-        Label artist = new Label(track.getArtist());
+        artist = new Label(track.getArtist());
         artist.setId("artist");
 
         this.setAlignment(Pos.BOTTOM_CENTER);
         this.setPadding(new Insets(20));
         this.getChildren().addAll(title, artist);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+    }
 
-
+    public void setLabels(Track track){
+        this.track = track;
+        title.setText(track.getTitle());
+        artist.setText(track.getArtist());
     }
 }

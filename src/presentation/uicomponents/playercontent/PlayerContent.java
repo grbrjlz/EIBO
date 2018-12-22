@@ -33,6 +33,8 @@ public class PlayerContent extends VBox {
     }
 
     public void initialize(){
+
+        //BEI ÄNDERUNG DES AKTUELLEN SONGS
         player.aktSongProperty().addListener(new ChangeListener<Number>() {
             @Override
             public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
@@ -42,6 +44,7 @@ public class PlayerContent extends VBox {
                 else {
                     cover.setDefaultCover();
                 }
+                songinfo.setLabels(player.getAktPlaylist().getSong(newValue.intValue()));
             }
         });
     }
