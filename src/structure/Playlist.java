@@ -89,11 +89,12 @@ public class Playlist {
 
     //GETTER
 
-    String getName(){
+
+    public String getName(){
         return this.name;
     }
 
-    Track getAktSong(){
+    public Track getAktSong(){
         return songs.get(aktSong);
     }
 
@@ -116,7 +117,7 @@ public class Playlist {
         return null;
     }
 
-    String getSongName(int i){
+    public String getSongName(int i){
         return songs.get(i).getName();
     }
 
@@ -124,9 +125,10 @@ public class Playlist {
         return songs.get(i).getSong();
     }
 
-    Track getSong(int i){
+    public Track getSong(int i){
         return songs.get(i);
     }
+
 
     int getSize(){
         return songs.size();

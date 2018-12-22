@@ -1,10 +1,13 @@
 package presentation.uicomponents.playercontent;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.layout.VBox;
 import presentation.uicomponents.cover.Cover;
 import presentation.uicomponents.songinfo.SongInfo;
 import structure.Mp3Player;
+import structure.Track;
 
 public class PlayerContent extends VBox {
     private Cover cover;
@@ -30,8 +33,20 @@ public class PlayerContent extends VBox {
     }
 
     public void initialize(){
-        //player.getAktTrack().
+        player.aktSongProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                if (player.getAktPlaylist().getSong(newValue.intValue()).getCover() != null){
+                    cover.setCover(player.getAktPlaylist().getSong(newValue.intValue()));
+                }
+                else {
+                    cover.setDefaultCover();
+                }
+            }
+        });
     }
+
+
 
 
 }

@@ -4,6 +4,8 @@ import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 public class Mp3Player {
 
@@ -11,16 +13,23 @@ public class Mp3Player {
     private SimpleAudioPlayer player;
 
     private IntegerProperty aktSong = new SimpleIntegerProperty();
-    private int playlistSize;
+    private IntegerProperty playlistSize = new SimpleIntegerProperty();
+
     boolean shuffle, repeat;
 
     private Playlist aktPlaylist;
+    private StringProperty aktSongName = new SimpleStringProperty();
+    private StringProperty aktPlaylistName = new SimpleStringProperty();
 
     public Mp3Player(Playlist aktPlaylist){
+
         this.aktPlaylist = aktPlaylist;
+        this.aktPlaylistName.setValue(aktPlaylist.getName());
         this.aktSong.setValue(0);
-        this.playlistSize = aktPlaylist.getSize();
+        this.aktSongName.setValue(aktPlaylist.getSongName(aktSong.get()));
+        this.playlistSize.setValue(aktPlaylist.getSize());
         this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong.get()));
+
     }
 
     //PLAYERCONTROL-METHODEN
@@ -40,32 +49,36 @@ public class Mp3Player {
     public void skip() {
         player.pause();
         int s = aktSong.get();
+        int size = playlistSize.get();
 
         if (!repeat){
             if (!shuffle) {
-                if (s == (playlistSize-1)) s = 0;
+                if (s == (size-1)) s = 0;
                 else s++;
             } else {
-                s = (int)(Math.random()*playlistSize);
+                s = (int)(Math.random()*size);
             }
         }
 
         player = minim.loadMP3File(aktPlaylist.getSongName(s));
         aktSong.setValue(s);
+        aktSongName.setValue(aktPlaylist.getSongName(aktSong.get()));
         player.play();
     }
 
     public void back() {
         player.pause();
         int s = aktSong.get();
+        int size = playlistSize.get();
 
         if (!repeat){
-            if (s == 0) s = (playlistSize-1);
+            if (s == 0) s = (size-1);
             else s--;
         }
 
         player = minim.loadMP3File(aktPlaylist.getSongName(s));
         aktSong.setValue(s);
+        aktSongName.setValue(aktPlaylist.getSongName(aktSong.get()));
         player.play();
 
     }
@@ -80,8 +93,55 @@ public class Mp3Player {
         else repeat = true;
     }
 
-    public final int getAktSong(){
+
+
+    //Property: int aktSong
+    public int getAktSong(){
         return aktSong.get();
+    }
+    public void setAktSong(int value){
+        aktSong.setValue(value);
+    }
+    public IntegerProperty aktSongProperty(){
+        return aktSong;
+    }
+
+
+    //Property: int playlistSize
+    public int getPlaylistSize(){
+        return playlistSize.get();
+    }
+    public void setPlaylistSize(int value){
+        playlistSize.setValue(value);
+    }
+    public IntegerProperty playlistSizeProperty(){
+        return playlistSize;
+    }
+
+    //Property: String aktSongName
+    public String getAktSongName(){
+        return aktSongName.get();
+    }
+    public void setAktSongName(String value){
+        aktSongName.setValue(value);
+    }
+    public StringProperty aktSongNameProperty(){
+        return aktSongName;
+    }
+
+    //Property: String aktPlaylistName
+    public String getAktPlaylistName(){
+        return aktPlaylistName.get();
+    }
+    public void setAktPlaylistName(String value){
+        aktPlaylistName.setValue(value);
+    }
+    public StringProperty aktPlaylistNameProperty(){
+        return aktPlaylistName;
+    }
+
+    public Playlist getAktPlaylist(){
+        return this.aktPlaylist;
     }
 
     public String getAktName() {
@@ -94,19 +154,10 @@ public class Mp3Player {
 
     public String getAktArtist() {
         return aktPlaylist.getSong(aktSong.get()).getArtist();
-
     }
 
     public Track getAktTrack(){
         return aktPlaylist.getSong(aktSong.get());
-    }
-
-    public void setAktSong(int song){
-        this.aktSong.setValue(song);
-    }
-
-    public String getAktPlaylistName(){
-        return this.aktPlaylist.getName();
     }
 
     public byte[] getCover() {
