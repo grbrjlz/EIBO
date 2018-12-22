@@ -15,6 +15,7 @@ public class Main extends Application {
     private Playlist defPlaylist;
     private PlaylistManager manager;
     private Mp3Player player;
+
     private PlayerViewController playerViewController;
     private PlaylistViewController playlistViewController;
     private Stage primaryStage;
@@ -24,8 +25,8 @@ public class Main extends Application {
 
         defPlaylist = new Playlist();
         manager = new PlaylistManager(defPlaylist);
-
         player = new Mp3Player(defPlaylist);
+        manager.addPlaylist(new Playlist("eigenePlaylist", "./newsongs"));
 
         playerViewController = new PlayerViewController(player, this);
         playlistViewController = new PlaylistViewController(player, manager,this);

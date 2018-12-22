@@ -15,6 +15,8 @@ public class Mp3Player {
     private IntegerProperty aktSong = new SimpleIntegerProperty();
     private IntegerProperty playlistSize = new SimpleIntegerProperty();
 
+    private IntegerProperty position = new SimpleIntegerProperty();
+
     boolean shuffle, repeat;
 
     private Playlist aktPlaylist;
@@ -28,12 +30,32 @@ public class Mp3Player {
         this.aktSong.setValue(0);
         this.aktSongName.setValue(aktPlaylist.getSongName(aktSong.get()));
         this.playlistSize.setValue(aktPlaylist.getSize());
-        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong.get()));
 
+        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong.get()));
+        this.position.setValue(player.position());
+
+    }
+
+    public void setAktPlaylist(Playlist aktPlaylist){
+        this.aktPlaylist = aktPlaylist;
+        this.aktPlaylistName.setValue(aktPlaylist.getName());
+        this.aktSong.setValue(0);
+        this.aktSongName.setValue(aktPlaylist.getSongName(aktSong.get()));
+        this.playlistSize.setValue(aktPlaylist.getSize());
+
+        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong.get()));
+        this.position.setValue(player.position());
     }
 
     //PLAYERCONTROL-METHODEN
     public void play(){
+        player.play();
+    }
+
+    public void play(int index){
+        player.pause();
+        player = minim.loadMP3File(aktPlaylist.getSongName(index));
+        aktSong.setValue(index);
         player.play();
     }
 
@@ -94,6 +116,19 @@ public class Mp3Player {
     }
 
 
+    //Property: int Position (bereits gespielte Zeit in ms)
+    public int getPosition(){
+        position.setValue(player.position());
+        return position.get();
+    }
+
+    public void setPosition(int value){
+        position.setValue(value);
+    }
+    public IntegerProperty positionProperty(){
+        position.setValue(player.position());
+        return position;
+    }
 
     //Property: int aktSong
     public int getAktSong(){

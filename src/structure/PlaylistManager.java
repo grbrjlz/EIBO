@@ -1,11 +1,15 @@
 package structure;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 
 public class PlaylistManager {
 
     private int aktPlaylist;
     private ArrayList<Playlist> playlists = new ArrayList<>();
+    private ObservableList<Playlist> lists = FXCollections.observableArrayList(playlists);
 
 
     //KONSTRUKTOREN
@@ -13,6 +17,10 @@ public class PlaylistManager {
     public  PlaylistManager (Playlist playlist){
         this.playlists.add(playlist);
         this.aktPlaylist = 0;
+    }
+
+    public void addPlaylist (Playlist playlist){
+        this.playlists.add(playlist);
     }
 
     //GETTER
@@ -24,6 +32,14 @@ public class PlaylistManager {
             }
         }
         return null;
+    }
+
+    public Playlist getPlaylist (int index){
+        return playlists.get(index);
+    }
+
+    public void setAktPlaylist (int index){
+        this.aktPlaylist = index;
     }
 
     public Playlist getAktPlaylist(){
@@ -44,6 +60,10 @@ public class PlaylistManager {
             return playlistnames;
         }
         return null;
+    }
+
+    public ObservableList<Playlist> getLists(){
+        return this.lists;
     }
 
     public void savePlaylist(Playlist playlist){

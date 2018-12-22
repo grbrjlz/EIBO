@@ -33,6 +33,7 @@ public class Track {
     public String getName() {
         return this.name;
     }
+
     public Mp3File getSong() {
         return song;
     }
@@ -44,7 +45,7 @@ public class Track {
     public String getTitle() {
         if (hasid3v1) {
             return this.id3v1.getTitle();
-        } else return null;
+        } else return song.getFilename();
     }
 
     public String getArtist() {
@@ -61,6 +62,16 @@ public class Track {
         if (hasid3v2) {
             return this.id3v2.getAlbumImage();
         } else return null;    }
+
+    public int getLength(){
+        return id3v2.getLength();
     }
+
+
+
+
+    }
+
+
 
 

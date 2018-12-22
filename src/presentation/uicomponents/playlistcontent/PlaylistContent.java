@@ -19,7 +19,7 @@ public class PlaylistContent extends VBox {
         this.manager = manager;
 
         Label aktPlaylistName = new Label("Aktuelle Playlist: "+manager.getAktPlaylistName());
-        this.lists = new FileList(manager);
+        this.lists = new FileList(player, manager);
 
         this.setAlignment(Pos.CENTER);
         this.setMinHeight(520);
