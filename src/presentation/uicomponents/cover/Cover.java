@@ -16,7 +16,7 @@ import java.io.IOException;
 public class Cover extends StackPane {
     private Track aktTrack;
     private Image img;
-    File defCoverPath = new File("./src/assets/images/nocover.jpg");
+    /*File defCoverPath = new File("./src/assets/images/nocover.jpg");
 
     BufferedImage defCoverImage;
     {
@@ -28,7 +28,7 @@ public class Cover extends StackPane {
     }
     WritableRaster raster = defCoverImage.getRaster();
     DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-    byte[] defCover = data.getData();
+    byte[] defCover = data.getData();*/
 
     public Cover(Track aktTrack) {
         this.aktTrack = aktTrack;
@@ -61,15 +61,20 @@ public class Cover extends StackPane {
 
         this.getChildren().clear();
         ImageView iv1 = new ImageView();
+
+        /*
         try {
             img = new Image(new ByteArrayInputStream(defCover));
             iv1.setImage(img);
         } catch (Exception e){
             e.printStackTrace();
         }
+        */
 
+        iv1.setImage(null);
         iv1.setFitHeight(350);
         iv1.setFitWidth(350);
         this.getChildren().addAll(iv1);
+
     }
 }
