@@ -26,7 +26,11 @@ public class PlayerContent extends VBox {
         this.getChildren().addAll(cover, songinfo);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
+        initialize();
+    }
 
+    public void initialize(){
+        //player.getAktTrack().
     }
 
 

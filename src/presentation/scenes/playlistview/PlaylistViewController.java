@@ -60,10 +60,13 @@ public class PlaylistViewController {
             view.setPlaylistContent(new PlaylistContent(player, manager));
         });
 
+        /*
         playerControl.getBack().addEventHandler(ActionEvent.ACTION, e -> {
             player.back();
             view.setPlaylistContent(new PlaylistContent(player, manager));
         });
+
+       */
 
         playerControl.getShuffle().addEventHandler(ActionEvent.ACTION, e -> {
             player.shuffle();

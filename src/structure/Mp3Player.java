@@ -2,13 +2,15 @@ package structure;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 public class Mp3Player {
 
     private SimpleMinim minim = new SimpleMinim(true);
     private SimpleAudioPlayer player;
 
-    private int aktSong;
+    private IntegerProperty aktSong = new SimpleIntegerProperty();
     private int playlistSize;
     boolean shuffle, repeat;
 
@@ -16,9 +18,9 @@ public class Mp3Player {
 
     public Mp3Player(Playlist aktPlaylist){
         this.aktPlaylist = aktPlaylist;
-        this.aktSong = 0;
+        this.aktSong.setValue(0);
         this.playlistSize = aktPlaylist.getSize();
-        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+        this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSong.get()));
     }
 
     //PLAYERCONTROL-METHODEN
@@ -37,29 +39,33 @@ public class Mp3Player {
 
     public void skip() {
         player.pause();
+        int s = aktSong.get();
 
         if (!repeat){
             if (!shuffle) {
-                if (aktSong == (playlistSize-1)) aktSong = 0;
-                else aktSong++;
+                if (s == (playlistSize-1)) s = 0;
+                else s++;
             } else {
-                aktSong = (int)(Math.random()*playlistSize);
+                s = (int)(Math.random()*playlistSize);
             }
         }
 
-        player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+        player = minim.loadMP3File(aktPlaylist.getSongName(s));
+        aktSong.setValue(s);
         player.play();
     }
 
     public void back() {
         player.pause();
+        int s = aktSong.get();
 
         if (!repeat){
-            if (aktSong == 0) aktSong = (playlistSize-1);
-            else aktSong--;
+            if (s == 0) s = (playlistSize-1);
+            else s--;
         }
 
-        player = minim.loadMP3File(aktPlaylist.getSongName(aktSong));
+        player = minim.loadMP3File(aktPlaylist.getSongName(s));
+        aktSong.setValue(s);
         player.play();
 
     }
@@ -74,25 +80,29 @@ public class Mp3Player {
         else repeat = true;
     }
 
+    public final int getAktSong(){
+        return aktSong.get();
+    }
+
     public String getAktName() {
-        return aktPlaylist.getSong(aktSong).getName();
+        return aktPlaylist.getSong(aktSong.get()).getName();
     }
 
     public String getAktTitle() {
-        return aktPlaylist.getSong(aktSong).getTitle();
+        return aktPlaylist.getSong(aktSong.get()).getTitle();
     }
 
     public String getAktArtist() {
-        return aktPlaylist.getSong(aktSong).getArtist();
+        return aktPlaylist.getSong(aktSong.get()).getArtist();
 
     }
 
     public Track getAktTrack(){
-        return aktPlaylist.getSong(aktSong);
+        return aktPlaylist.getSong(aktSong.get());
     }
 
     public void setAktSong(int song){
-        this.aktSong = song;
+        this.aktSong.setValue(song);
     }
 
     public String getAktPlaylistName(){
@@ -100,7 +110,7 @@ public class Mp3Player {
     }
 
     public byte[] getCover() {
-        return aktPlaylist.getSong(aktSong).getCover();
+        return aktPlaylist.getSong(aktSong.get()).getCover();
 
     }
 

@@ -1,11 +1,13 @@
 package presentation.uicomponents.playercontrol;
 
+import javafx.event.ActionEvent;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
+import presentation.uicomponents.playercontent.PlayerContent;
 import structure.Mp3Player;
 
 public class PlayerControl extends HBox {
@@ -20,6 +22,10 @@ public class PlayerControl extends HBox {
 
     private Slider volume;
     private Label volumelabel;
+    private float volumeLabelValue;
+
+    private boolean isPlaying;
+
 
     public PlayerControl(Mp3Player player){
         this.player = player;
@@ -51,8 +57,49 @@ public class PlayerControl extends HBox {
         this.getChildren().addAll(back, play, stop, skip, shuffle, repeat, volume, volumelabel);
         this.getStylesheets().add(getClass().
                 getResource("style.css").toExternalForm());
+        initialize();
     }
 
+    private void initialize(){
+        play.addEventHandler(ActionEvent.ACTION, e -> {
+            if (!isPlaying) {
+                player.play();
+                isPlaying = true;
+            } else {
+                player.pause();
+                isPlaying = false;
+            }
+        });
+        stop.addEventHandler(ActionEvent.ACTION, e -> {
+            player.stop();
+            isPlaying = false;
+        });
+
+        skip.addEventHandler(ActionEvent.ACTION, e -> {
+            player.skip();
+            //view.setPlayerContent(new PlayerContent(player));
+        });
+
+        back.addEventHandler(ActionEvent.ACTION, e -> {
+            player.back();
+            //view.setPlayerContent(new PlayerContent(player));
+        });
+
+        shuffle.addEventHandler(ActionEvent.ACTION, e -> {
+            player.shuffle();
+        });
+
+        repeat.addEventHandler(ActionEvent.ACTION, e -> {
+            player.repeat();
+        });
+
+
+        volume.valueProperty().addListener((observable, oldValue, newValue) -> {
+            volumelabel.textProperty().setValue(String.format("%.2f", newValue));
+            player.setVolume(newValue.floatValue());
+        });
+
+    }
     public Button getBack() {
         return this.back;
     }

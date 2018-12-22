@@ -34,4 +34,6 @@ public class Cover extends StackPane {
 
     }
 
+
+
 }
