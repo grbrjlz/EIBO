@@ -55,17 +55,17 @@ public class Track {
     public String getYear() {
         if (year != null) {
             return this.year;
-        } else return "kein id3-Tag vorhanden";    }
+        } else return "-";    }
 
     public String getTrack() {
         if (track != null) {
             return this.track;
-        } else return "kein id3-Tag vorhanden";    }
+        } else return "-";    }
 
     public String getKey() {
         if (key != null) {
             return this.key;
-        } else return "kein id3-Tag vorhanden";    }
+        } else return "-";    }
 
     public int getGenre() {
         if (genre != 0) {
@@ -94,19 +94,19 @@ public class Track {
     public String getArtist() {
         if (artist != null) {
             return this.artist;
-        } else return "kein id3-Tag vorhanden";
+        } else return "-";
     }
 
     public String getAlbum() {
         if (album != null) {
             return this.album;
-        } else return "kein id3-Tag vorhanden";
+        } else return "-";
     }
 
     public String getComment(){
         if (comment != null) {
             return this.comment;
-        } else return "kein id3-Tag vorhanden";
+        } else return "-";
     }
 
     public Image getCover() {

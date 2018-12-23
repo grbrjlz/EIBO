@@ -52,7 +52,7 @@ public class PlayerControl extends BorderPane {
         repeat.setStyle("-fx-border-color: #ee1200");
 
 
-        volume = new Slider(-50, 50, 25);
+        volume = new Slider(-50, 0, -10);
 
         center.getChildren().addAll(back, play, stop, skip);
         left.getChildren().addAll(shuffle, repeat);
@@ -78,6 +78,7 @@ public class PlayerControl extends BorderPane {
     }
 
     private void initialize(){
+        //Wenn Buttons geklickt werden
         play.addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
@@ -101,8 +102,11 @@ public class PlayerControl extends BorderPane {
         });
         shuffle.addEventHandler(ActionEvent.ACTION, e -> player.shuffle());
         repeat.addEventHandler(ActionEvent.ACTION, e -> player.repeat());
+
+        //Bei Verschieben des Volumesliders
         volume.valueProperty().addListener((observable, oldValue, newValue) -> player.setVolume(newValue.floatValue()));
 
+        //Repräsentation des aktuellen Zustands im Backend durch Grün/Rot
         player.shuffleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 shuffle.setStyle("-fx-border-color: #88ee00");
@@ -110,7 +114,6 @@ public class PlayerControl extends BorderPane {
                 shuffle.setStyle("-fx-border-color: #ee1200");
             }
         });
-
         player.repeatProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 repeat.setStyle("-fx-border-color: #88ee00");
@@ -118,6 +121,8 @@ public class PlayerControl extends BorderPane {
                 repeat.setStyle("-fx-border-color: #ee1200");
             }
         });
+
+
 
     }
     

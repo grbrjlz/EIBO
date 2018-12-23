@@ -19,21 +19,23 @@ public class TimeControl extends HBox {
         this.slider = new Slider(0.0, player.getAudioPlayer().length(), 0);
         this.postion = new Label("0s");
         this.length = new Label();
+
         length.setText((player.getAudioPlayer().length())/1000+"s");
         postion.setPadding(new Insets(0,10,0,0));
         length.setPadding(new Insets(0,0,0,10));
+        postion.setAlignment(Pos.CENTER);
+        length.setAlignment(Pos.CENTER);
+
         this.setAlignment(Pos.CENTER);
-        this.setPadding(new Insets(30,0,20,0));
+        this.setPadding(new Insets(5,0,0,0));
         this.getChildren().addAll(postion, slider, length);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         initialize();
     }
 
     private void initialize() {
-        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
-            if (newValue.intValue() == 0) player.pause();
-            else player.play(newValue.intValue());
-        });
+
+        slider.setOnMouseReleased(event -> player.play((int)slider.getValue()));
 
         player.aktSongLengthProperty().addListener((observable, oldValue, newValue) -> {
             slider.setMax(newValue.intValue());

@@ -35,8 +35,8 @@ public class Cover extends StackPane {
             iv1.setImage(image.getValue());
         }
 
-        iv1.setFitHeight(350);
-        iv1.setFitWidth(350);
+        iv1.setFitHeight(300);
+        iv1.setFitWidth(300);
 
         this.getChildren().addAll(iv1);
 

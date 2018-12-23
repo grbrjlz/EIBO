@@ -45,7 +45,7 @@ public class Mp3Player {
         this.playing.setValue(false);
 
         Timeline timeline = new Timeline(new KeyFrame(
-                Duration.millis(1000),
+                Duration.millis(1),
                 ae -> refreshPos()));
         timeline.setCycleCount(Animation.INDEFINITE);
         timeline.play();
@@ -160,6 +160,10 @@ public class Mp3Player {
         return aktSongLength;
     }
 
+    public IntegerProperty aktSongIndexProperty() {
+        return aktSongIndex;
+    }
+
     public BooleanProperty shuffleProperty(){
         return shuffle;
     }
@@ -175,6 +179,10 @@ public class Mp3Player {
 
     public StringProperty aktSongNameProperty(){
         return aktSongName;
+    }
+
+    public StringProperty aktPlaylistNameProperty(){
+        return aktPlaylistName;
     }
 
     public void setAktPlaylist(Playlist aktPlaylist){

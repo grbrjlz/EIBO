@@ -1,5 +1,7 @@
 package structure;
 
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -7,12 +9,13 @@ import java.util.ArrayList;
 
 public class PlaylistManager {
 
-    private int aktPlaylist;
+    //private int aktPlaylist;
+    private IntegerProperty aktPlaylist = new SimpleIntegerProperty();
     private final ObservableList<Playlist> playlists = FXCollections.observableArrayList(new ArrayList<>());
 
     public  PlaylistManager (Playlist playlist){
         this.playlists.add(playlist);
-        this.aktPlaylist = 0;
+        aktPlaylist.setValue(0);
     }
 
     public void addPlaylist (Playlist playlist){
@@ -24,11 +27,11 @@ public class PlaylistManager {
     }
 
     public void setAktPlaylist (int index){
-        this.aktPlaylist = index;
+        aktPlaylist.setValue(index);
     }
 
     public Playlist getAktPlaylist(){
-        return this.playlists.get(aktPlaylist);
+        return this.playlists.get(aktPlaylist.get());
     }
 
     public ArrayList<String> getPlaylistNames(){
@@ -37,6 +40,10 @@ public class PlaylistManager {
             playlistnames.add(playlist.getName());
         }
         return playlistnames;
+    }
+
+    public IntegerProperty aktPlaylistProperty() {
+        return aktPlaylist;
     }
 
     /*
