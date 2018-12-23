@@ -62,7 +62,7 @@ public class SongInfo extends VBox {
         //album.setText(player.getAudioPlayer().getMetaData());
         year.setText("Jahr: "+track.getYear());
         key.setText("Key: "+track.getKey());
-        length.setText("Länge: "+(player.getAudioPlayer().length())/1000+" Sekunden");
+        length.setText("Länge: "+(player.getAktSongLength())/1000+" Sekunden");
         bpm.setText("BPM: "+track.getBpm());
 
     }

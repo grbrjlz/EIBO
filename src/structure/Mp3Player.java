@@ -2,28 +2,29 @@ package structure;
 
 import de.hsrm.mi.eibo.simpleplayer.SimpleAudioPlayer;
 import de.hsrm.mi.eibo.simpleplayer.SimpleMinim;
+
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.beans.property.*;
 import javafx.scene.image.Image;
+import javafx.util.Duration;
+
 
 public class Mp3Player {
 
     private SimpleMinim minim = new SimpleMinim(true);
     private SimpleAudioPlayer player;
-
-    private IntegerProperty aktSongIndex = new SimpleIntegerProperty();
-    private IntegerProperty playlistSize = new SimpleIntegerProperty();
-
-    private IntegerProperty position = new SimpleIntegerProperty();
-
-    //boolean shuffle, repeat, playing;
-
-    private BooleanProperty shuffle = new SimpleBooleanProperty();
-    private BooleanProperty repeat = new SimpleBooleanProperty();
-    private BooleanProperty playing = new SimpleBooleanProperty();
-
     private Playlist aktPlaylist;
     private Track aktSong;
 
+    private IntegerProperty aktSongIndex = new SimpleIntegerProperty();
+    private IntegerProperty playlistSize = new SimpleIntegerProperty();
+    private IntegerProperty aktSongLength = new SimpleIntegerProperty();
+    private IntegerProperty position = new SimpleIntegerProperty();
+    private BooleanProperty shuffle = new SimpleBooleanProperty();
+    private BooleanProperty repeat = new SimpleBooleanProperty();
+    private BooleanProperty playing = new SimpleBooleanProperty();
     private StringProperty aktSongName = new SimpleStringProperty();
     private StringProperty aktPlaylistName = new SimpleStringProperty();
 
@@ -41,10 +42,20 @@ public class Mp3Player {
 
         //Initialisierung des Players
         this.player = minim.loadMP3File(aktSong.getFilename());
+        this.aktSongLength.setValue(player.length());
         this.playing.setValue(false);
+
+        Timeline timeline = new Timeline(new KeyFrame(
+                Duration.millis(1000),
+                ae -> refreshPos()));
+        timeline.setCycleCount(Animation.INDEFINITE);
+        timeline.play();
 
     }
 
+    public void refreshPos(){
+        position.setValue(player.position());
+    }
     public SimpleAudioPlayer getAudioPlayer(){
         return this.player;
     }
@@ -58,6 +69,7 @@ public class Mp3Player {
         this.aktSongName.setValue(aktSong.getFilename());
         this.playlistSize.setValue(aktPlaylist.getSize());
         this.player = minim.loadMP3File(aktPlaylist.getSongName(aktSongIndex.get()));
+        this.aktSongLength.setValue(player.length());
         this.playing.setValue(false);
     }
 
@@ -65,6 +77,7 @@ public class Mp3Player {
     public void play(){
         player.play();
         playing.setValue(true);
+
 
     }
 
@@ -76,8 +89,11 @@ public class Mp3Player {
         aktSongIndex.setValue(index);
         player = minim.loadMP3File(aktSong.getFilename());
         aktSongName.setValue(aktSong.getFilename());
+        aktSongLength.setValue(player.length());
+
 
         player.play();
+
         playing.setValue(true);
     }
 
@@ -111,6 +127,7 @@ public class Mp3Player {
         }
 
         player = minim.loadMP3File(aktPlaylist.getSongName(s));
+        aktSongLength.setValue(player.length());
         aktSongIndex.setValue(s);
         aktSong = aktPlaylist.getSong(aktSongIndex.get());
         aktSongName.setValue(aktSong.getFilename());
@@ -136,6 +153,7 @@ public class Mp3Player {
         aktSongIndex.setValue(s);
         aktSong = aktPlaylist.getSong(aktSongIndex.get());
         aktSongName.setValue(aktSong.getFilename());
+        aktSongLength.setValue(player.length());
 
         player.play();
         playing.setValue(true);
@@ -153,6 +171,18 @@ public class Mp3Player {
         else repeat.setValue(true);
     }
 
+
+    public int getAktSongLength() {
+        return aktSongLength.get();
+    }
+
+    public IntegerProperty aktSongLengthProperty() {
+        return aktSongLength;
+    }
+
+    public void setAktSongLength(int aktSongLength) {
+        this.aktSongLength.set(aktSongLength);
+    }
 
 
     //Property: boolean playing

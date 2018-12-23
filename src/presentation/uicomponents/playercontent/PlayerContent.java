@@ -38,6 +38,7 @@ public class PlayerContent extends VBox {
 
     public void initialize(){
 
+
         //Bei Änderung des aktSongs werden Songinfo und Cover aktualisiert
 
         player.aktSongNameProperty().addListener((observable, oldValue, newValue) -> {

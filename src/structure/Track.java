@@ -168,7 +168,7 @@ public class Track {
 
     public int getLength(){
         if (length != 0) {
-            return length/1000;
+            return length;
         } else return 0;    }
 
 
