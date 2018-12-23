@@ -10,16 +10,15 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.HBox;
+import javafx.scene.layout.*;
 import javafx.scene.control.Button;
-import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import structure.Mp3Player;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class PlayerControl extends VBox {
+public class PlayerControl extends BorderPane {
     private Mp3Player player;
 
     private Button play;
@@ -37,8 +36,9 @@ public class PlayerControl extends VBox {
     public PlayerControl(Mp3Player player){
         this.player = player;
 
-        HBox top = new HBox();
-        HBox bottom = new HBox();
+        HBox left = new HBox();
+        HBox center = new HBox();
+        HBox right = new HBox();
 
         back = new Button();
         back.setId("back");
@@ -64,19 +64,24 @@ public class PlayerControl extends VBox {
 
         volume = new Slider(-50, 50, 25);
 
-        top.getChildren().addAll(back, play, stop, skip);
-        bottom.getChildren().addAll(shuffle, volume, repeat);
+        center.getChildren().addAll(back, play, stop, skip);
+        left.getChildren().addAll(shuffle, repeat);
+        right.getChildren().addAll(volume);
 
-        top.setAlignment(Pos.CENTER);
-        bottom.setAlignment(Pos.CENTER);
+        left.setPadding(new Insets(0, 0, 0, 30));
+        right.setPadding(new Insets(0, 30, 0, 0));
 
-        top.setSpacing(10);
-        bottom.setSpacing(10);
+        center.setAlignment(Pos.CENTER);
+        right.setAlignment(Pos.CENTER);
+        left.setAlignment(Pos.CENTER);
 
-        top.setPadding(new Insets(0,0,5,0));
-        bottom.setPadding(new Insets(5, 0,0,0));
-        this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(top, bottom);
+        center.setSpacing(5);
+        left.setSpacing(5);
+
+        this.setLeft(left);
+        this.setRight(right);
+        this.setCenter(center);
+
         this.getStylesheets().add(getClass().
                 getResource("style.css").toExternalForm());
         initialize();
