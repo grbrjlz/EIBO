@@ -3,22 +3,26 @@ package presentation.uicomponents.playercontent;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import presentation.uicomponents.cover.Cover;
 import presentation.uicomponents.songinfo.SongInfo;
+import presentation.uicomponents.timecontrol.TimeControl;
 import structure.Mp3Player;
 import structure.Track;
 
 public class PlayerContent extends VBox {
     private Cover cover;
     private SongInfo songinfo;
+    private TimeControl timecontrol;
 
     private Mp3Player player;
 
     public PlayerContent(Mp3Player player){
         this.player = player;
         this.cover = new Cover(player.getAktTrack());
-        this.songinfo = new SongInfo(player.getAktTrack());
+        this.songinfo = new SongInfo(player);
+        this.timecontrol = new TimeControl(player);
 
         this.setAlignment(Pos.CENTER);
         this.setMinHeight(520);
@@ -26,7 +30,7 @@ public class PlayerContent extends VBox {
         this.setPrefWidth(760);
         this.setPrefHeight(520);
         this.setStyle("-fx-background-color: #2E2E30;");
-        this.getChildren().addAll(cover, songinfo);
+        this.getChildren().addAll(songinfo, cover, timecontrol);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
         initialize();
@@ -34,19 +38,20 @@ public class PlayerContent extends VBox {
 
     public void initialize(){
 
-        //BEI ÄNDERUNG DES AKTUELLEN SONGS
-        player.aktSongProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                if (player.getAktPlaylist().getSong(newValue.intValue()).getCover() != null){
-                    cover.setCover(player.getAktPlaylist().getSong(newValue.intValue()));
-                }
-                else {
-                    cover.setDefaultCover();
-                }
-                songinfo.setLabels(player.getAktPlaylist().getSong(newValue.intValue()));
+        //Bei Änderung des aktSongs werden Songinfo und Cover aktualisiert
+
+        player.aktSongNameProperty().addListener((observable, oldValue, newValue) -> {
+            songinfo.setLabels(player);
+            Image newCover = player.getAktTrack().getCover();
+
+            if (newCover != null){
+                cover.setImage(newCover);
+            } else {
+                cover.setDefImage();
             }
         });
+
+
     }
 
 

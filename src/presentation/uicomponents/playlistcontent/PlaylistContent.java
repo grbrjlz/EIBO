@@ -17,8 +17,6 @@ public class PlaylistContent extends VBox {
     public PlaylistContent(Mp3Player player,PlaylistManager manager){
         this.player = player;
         this.manager = manager;
-
-        Label aktPlaylistName = new Label("Aktuelle Playlist: "+manager.getAktPlaylistName());
         this.lists = new FileList(player, manager);
 
         this.setAlignment(Pos.CENTER);
@@ -27,7 +25,7 @@ public class PlaylistContent extends VBox {
         this.setPrefWidth(760);
         this.setPrefHeight(520);
         this.setStyle("-fx-background-color: #2E2E30;");
-        this.getChildren().addAll(aktPlaylistName, lists);
+        this.getChildren().addAll(lists);
        // this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
 

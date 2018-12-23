@@ -1,5 +1,8 @@
 package presentation.uicomponents.cover;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
@@ -15,66 +18,49 @@ import java.io.IOException;
 
 public class Cover extends StackPane {
     private Track aktTrack;
-    private Image img;
-    /*File defCoverPath = new File("./src/assets/images/nocover.jpg");
+    private ObjectProperty<Image> image = new SimpleObjectProperty<>();
+    private Image defImage;
+    ImageView iv1 = new ImageView();
 
-    BufferedImage defCoverImage;
-    {
-        try {
-            defCoverImage = ImageIO.read(defCoverPath);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-    WritableRaster raster = defCoverImage.getRaster();
-    DataBufferByte data   = (DataBufferByte) raster.getDataBuffer();
-    byte[] defCover = data.getData();*/
 
     public Cover(Track aktTrack) {
         this.aktTrack = aktTrack;
-        setCover(aktTrack);
-
-    }
-
-    public void setCover(Track aktTrack) {
-        this.aktTrack = aktTrack;
-        ImageView iv1 = new ImageView();
+        this.image.setValue(aktTrack.getCover());
 
         try {
-            if (aktTrack.getCover() != null){
-                byte[] cover = aktTrack.getCover();
-                img = new Image(new ByteArrayInputStream(cover));
-                iv1.setImage(img);
-            }
-
+            BufferedImage def = ImageIO.read(new File("./src/assets/images/nocover.jpg"));
+            this.defImage = SwingFXUtils.toFXImage(def, null);
         } catch (Exception e){
             e.printStackTrace();
         }
 
-        iv1.setFitHeight(350);
-        iv1.setFitWidth(350);
-        this.getChildren().addAll(iv1);
-
-    }
-
-    public void setDefaultCover(){
-
-        this.getChildren().clear();
-        ImageView iv1 = new ImageView();
-
-        /*
-        try {
-            img = new Image(new ByteArrayInputStream(defCover));
-            iv1.setImage(img);
-        } catch (Exception e){
-            e.printStackTrace();
+        if (image.get() == null) {
+            image.setValue(defImage);
+            iv1.setImage(image.getValue());
+        } else {
+            iv1.setImage(image.getValue());
         }
-        */
 
-        iv1.setImage(null);
         iv1.setFitHeight(350);
         iv1.setFitWidth(350);
+
         this.getChildren().addAll(iv1);
 
     }
+
+    public void setImage(Image img){
+
+        image.setValue(img);
+        iv1.setImage(image.getValue());
+
+    }
+
+    public void setDefImage(){
+        image.setValue(defImage);
+        iv1.setImage(image.getValue());
+    }
+
+
+
+
 }

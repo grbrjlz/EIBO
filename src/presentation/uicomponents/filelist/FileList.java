@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -30,6 +31,9 @@ public class FileList extends VBox {
     public FileList(Mp3Player player, PlaylistManager manager) {
         this.manager = manager;
         this.player = player;
+
+        Label p = new Label("Playlists");
+        p.setPadding(new Insets(20, 0, 0, 0));
         this.playlists = new ListView<>();
         ObservableList<String> playlistitems = FXCollections.observableArrayList(manager.getPlaylistNames());
         playlists.setItems(playlistitems);
@@ -37,7 +41,8 @@ public class FileList extends VBox {
         playlists.setMaxWidth(650);
         playlists.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
-
+        Label s = new Label("Songs");
+        s.setPadding(new Insets(20, 0, 0, 0));
         this.songs = new ListView<>();
         ObservableList<String> songitems = FXCollections.observableArrayList(manager.getAktPlaylist().getSongNames());
         songs.setItems(songitems);
@@ -46,7 +51,7 @@ public class FileList extends VBox {
         songs.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
 
         this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(playlists, songs);
+        this.getChildren().addAll(p, playlists, s, songs);
         this.setSpacing(5);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
 
@@ -55,29 +60,23 @@ public class FileList extends VBox {
 
     public void initialize() {
 
-        playlists.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                player.pause();
-                int selected = playlists.getSelectionModel().getSelectedIndex();
+        playlists.setOnMouseClicked(event -> {
+            player.pause();
+            int selected = playlists.getSelectionModel().getSelectedIndex();
 
-                manager.setAktPlaylist(selected);
-                player.setAktPlaylist(manager.getPlaylist(selected));
+            manager.setAktPlaylist(selected);
+            player.setAktPlaylist(manager.getPlaylist(selected));
 
-                ArrayList<String> newsongs = manager.getAktPlaylist().getSongNames();
+            ArrayList<String> newsongs = manager.getAktPlaylist().getSongNames();
 
-                ObservableList<String> newsongitems = FXCollections.observableArrayList(newsongs);
-                songs.setItems(newsongitems);
-            }
+            ObservableList<String> newsongitems = FXCollections.observableArrayList(newsongs);
+            songs.setItems(newsongitems);
         });
 
-        songs.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent event) {
-                int selected = songs.getSelectionModel().getSelectedIndex();
-                player.pause();
-                player.play(selected);
-            }
+        songs.setOnMouseClicked(event -> {
+            int selected = songs.getSelectionModel().getSelectedIndex();
+            player.pause();
+            player.play(selected);
         });
     }
 }

@@ -1,7 +1,6 @@
 package structure;
 
 import com.mpatric.mp3agic.Mp3File;
-import javafx.beans.property.IntegerProperty;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -71,7 +70,7 @@ public class Playlist {
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
 
             for (Track song : songs) {
-                writer.write(song.getName());
+                writer.write(song.getFilename());
                 writer.newLine();
             }
             writer.close();
@@ -112,6 +111,10 @@ public class Playlist {
         return this.name;
     }
 
+    public int getAktSongNumber(){
+        return aktSong;
+    }
+
     public Track getAktSong() {
         return songs.get(aktSong);
     }
@@ -136,7 +139,7 @@ public class Playlist {
     }
 
     public String getSongName(int i) {
-        return songs.get(i).getName();
+        return songs.get(i).getFilename();
     }
 
     public Mp3File getMp3(int i) {
