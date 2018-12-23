@@ -49,6 +49,7 @@ public class SongInfo extends VBox {
 
         this.setAlignment(Pos.BOTTOM_CENTER);
         this.setPadding(new Insets(20, 0, 30, 0));
+        album.setPadding(new Insets(10,0,0,0));
         this.getChildren().addAll(title, artist, album, year, key, length);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
@@ -59,7 +60,7 @@ public class SongInfo extends VBox {
 
         title.setText(track.getTitle());
         artist.setText(track.getArtist());
-        //album.setText(player.getAudioPlayer().getMetaData());
+        album.setText("Album: "+player.getAktTrack().getAlbum());
         year.setText("Jahr: "+track.getYear());
         key.setText("Key: "+track.getKey());
         length.setText("Länge: "+(player.getAktSongLength())/1000+" Sekunden");

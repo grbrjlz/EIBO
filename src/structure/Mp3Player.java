@@ -77,11 +77,14 @@ public class Mp3Player {
     public void play(){
         player.play();
         playing.setValue(true);
-
-
     }
 
-    public void play(int index){
+    public void play(int ms){
+        player.play(ms);
+        playing.setValue(true);
+    }
+
+    public void playTrack(int index){
         player.pause();
         playing.setValue(false);
 
@@ -97,6 +100,22 @@ public class Mp3Player {
         playing.setValue(true);
     }
 
+    public void playTrack(int index, int ms){
+        player.pause();
+        playing.setValue(false);
+
+        aktSong = aktPlaylist.getSong(index);
+        aktSongIndex.setValue(index);
+        player = minim.loadMP3File(aktSong.getFilename());
+        aktSongName.setValue(aktSong.getFilename());
+        aktSongLength.setValue(player.length());
+
+
+        player.play(ms);
+
+        playing.setValue(true);
+    }
+
     public void pause() {
         player.pause();
         playing.setValue(false);
@@ -104,9 +123,9 @@ public class Mp3Player {
     }
 
     public void stop() {
+        playing.setValue(false);
         player.pause();
         player.rewind();
-        playing.setValue(false);
 
     }
 

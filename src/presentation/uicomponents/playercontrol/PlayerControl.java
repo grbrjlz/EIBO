@@ -12,13 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.layout.HBox;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 import structure.Mp3Player;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
-public class PlayerControl extends HBox {
+public class PlayerControl extends VBox {
     private Mp3Player player;
 
     private Button play;
@@ -36,6 +37,9 @@ public class PlayerControl extends HBox {
     public PlayerControl(Mp3Player player){
         this.player = player;
 
+        HBox top = new HBox();
+        HBox bottom = new HBox();
+
         back = new Button();
         back.setId("back");
 
@@ -50,16 +54,29 @@ public class PlayerControl extends HBox {
 
         shuffle = new Button();
         shuffle.setId("shuffle");
+        shuffle.setStyle("-fx-border-color: #ee1200");
+
 
         repeat = new Button();
         repeat.setId("repeat");
+        repeat.setStyle("-fx-border-color: #ee1200");
 
-        volume = new Slider(0.0, 1.0, 0.75);
 
-        this.setSpacing(10);
-        this.setPadding(new Insets(10));
+        volume = new Slider(-50, 50, 25);
+
+        top.getChildren().addAll(back, play, stop, skip);
+        bottom.getChildren().addAll(shuffle, volume, repeat);
+
+        top.setAlignment(Pos.CENTER);
+        bottom.setAlignment(Pos.CENTER);
+
+        top.setSpacing(10);
+        bottom.setSpacing(10);
+
+        top.setPadding(new Insets(0,0,5,0));
+        bottom.setPadding(new Insets(5, 0,0,0));
         this.setAlignment(Pos.CENTER);
-        this.getChildren().addAll(back, play, stop, skip, shuffle, repeat, volume);
+        this.getChildren().addAll(top, bottom);
         this.getStylesheets().add(getClass().
                 getResource("style.css").toExternalForm());
         initialize();
@@ -93,20 +110,32 @@ public class PlayerControl extends HBox {
         repeat.addEventHandler(ActionEvent.ACTION, e -> {
             player.repeat();
         });
-
         volume.valueProperty().addListener((observable, oldValue, newValue) -> {
             player.setVolume(newValue.floatValue());
         });
 
-
-
-        player.positionProperty().addListener(new ChangeListener<Number>() {
+        player.shuffleProperty().addListener(new ChangeListener<Boolean>() {
             @Override
-            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
-                System.out.println(newValue);
-                //positionlabel.setText(newValue.toString());
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue){
+                    shuffle.setStyle("-fx-border-color: #88ee00");
+                } else {
+                    shuffle.setStyle("-fx-border-color: #ee1200");
+                }
             }
         });
+
+        player.repeatProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                if (newValue){
+                    repeat.setStyle("-fx-border-color: #88ee00");
+                } else {
+                    repeat.setStyle("-fx-border-color: #ee1200");
+                }
+            }
+        });
+
 
     }
     public Button getBack() {

@@ -76,7 +76,7 @@ public class FileList extends VBox {
         songs.setOnMouseClicked(event -> {
             int selected = songs.getSelectionModel().getSelectedIndex();
             player.pause();
-            player.play(selected);
+            player.playTrack(selected);
         });
     }
 }

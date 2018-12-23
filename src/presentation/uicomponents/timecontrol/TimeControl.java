@@ -43,6 +43,11 @@ public class TimeControl extends HBox {
     }
 
     public void initialize() {
+        slider.valueProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue.intValue() == 0) player.pause();
+            else player.play(newValue.intValue());
+        });
+
         player.aktSongLengthProperty().addListener((observable, oldValue, newValue) -> {
             slider.setMax(newValue.intValue());
             length.setText((newValue.intValue())/1000+"s");
