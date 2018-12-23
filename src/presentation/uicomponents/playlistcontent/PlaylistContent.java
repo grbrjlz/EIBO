@@ -1,7 +1,6 @@
 package presentation.uicomponents.playlistcontent;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import presentation.uicomponents.filelist.FileList;
 import structure.Mp3Player;
@@ -10,14 +9,8 @@ import structure.PlaylistManager;
 public class PlaylistContent extends VBox {
 
 
-    private Mp3Player player;
-    private PlaylistManager manager;
-    private FileList lists;
-
     public PlaylistContent(Mp3Player player,PlaylistManager manager){
-        this.player = player;
-        this.manager = manager;
-        this.lists = new FileList(player, manager);
+        FileList lists = new FileList(player, manager);
 
         this.setAlignment(Pos.CENTER);
         this.setMinHeight(520);
@@ -26,9 +19,6 @@ public class PlaylistContent extends VBox {
         this.setPrefHeight(520);
         this.setStyle("-fx-background-color: #2E2E30;");
         this.getChildren().addAll(lists);
-       // this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-
-
     }
 
 

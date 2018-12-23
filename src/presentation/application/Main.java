@@ -12,9 +12,6 @@ import structure.Playlist;
 import structure.PlaylistManager;
 
 public class Main extends Application {
-    private Playlist defPlaylist;
-    private PlaylistManager manager;
-    private Mp3Player player;
 
     private PlayerViewController playerViewController;
     private PlaylistViewController playlistViewController;
@@ -23,9 +20,9 @@ public class Main extends Application {
     @Override
     public void init(){
 
-        defPlaylist = new Playlist();
-        manager = new PlaylistManager(defPlaylist);
-        player = new Mp3Player(defPlaylist);
+        Playlist defPlaylist = new Playlist();
+        PlaylistManager manager = new PlaylistManager(defPlaylist);
+        Mp3Player player = new Mp3Player(defPlaylist);
         manager.addPlaylist(new Playlist("eigenePlaylist", "./newsongs"));
 
         playerViewController = new PlayerViewController(player, this);

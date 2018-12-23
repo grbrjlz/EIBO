@@ -1,7 +1,5 @@
 package presentation.uicomponents.playercontent;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
@@ -9,20 +7,18 @@ import presentation.uicomponents.cover.Cover;
 import presentation.uicomponents.songinfo.SongInfo;
 import presentation.uicomponents.timecontrol.TimeControl;
 import structure.Mp3Player;
-import structure.Track;
 
 public class PlayerContent extends VBox {
-    private Cover cover;
-    private SongInfo songinfo;
-    private TimeControl timecontrol;
+    private final Cover cover;
+    private final SongInfo songinfo;
 
-    private Mp3Player player;
+    private final Mp3Player player;
 
     public PlayerContent(Mp3Player player){
         this.player = player;
         this.cover = new Cover(player.getAktTrack());
         this.songinfo = new SongInfo(player);
-        this.timecontrol = new TimeControl(player);
+        TimeControl timecontrol = new TimeControl(player);
 
         this.setAlignment(Pos.CENTER);
         this.setMinHeight(520);
@@ -36,7 +32,7 @@ public class PlayerContent extends VBox {
         initialize();
     }
 
-    public void initialize(){
+    private void initialize(){
 
 
         //Bei Änderung des aktSongs werden Songinfo und Cover aktualisiert

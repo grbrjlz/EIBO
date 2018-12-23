@@ -1,22 +1,14 @@
 package presentation.uicomponents.filelist;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionMode;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import structure.Mp3Player;
-import structure.Playlist;
 import structure.PlaylistManager;
 
 import java.util.ArrayList;
@@ -24,9 +16,10 @@ import java.util.ArrayList;
 
 public class FileList extends VBox {
 
-    Mp3Player player;
-    PlaylistManager manager;
-    ListView<String> playlists, songs;
+    private final Mp3Player player;
+    private final PlaylistManager manager;
+    private final ListView<String> playlists;
+    private final ListView<String> songs;
 
     public FileList(Mp3Player player, PlaylistManager manager) {
         this.manager = manager;
@@ -58,7 +51,7 @@ public class FileList extends VBox {
         initialize();
     }
 
-    public void initialize() {
+    private void initialize() {
 
         playlists.setOnMouseClicked(event -> {
             player.pause();

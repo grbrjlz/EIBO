@@ -10,21 +10,15 @@ import structure.Track;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.IOException;
 
 public class Cover extends StackPane {
-    private Track aktTrack;
-    private ObjectProperty<Image> image = new SimpleObjectProperty<>();
+    private final ObjectProperty<Image> image = new SimpleObjectProperty<>();
     private Image defImage;
-    ImageView iv1 = new ImageView();
+    private final ImageView iv1 = new ImageView();
 
 
     public Cover(Track aktTrack) {
-        this.aktTrack = aktTrack;
         this.image.setValue(aktTrack.getCover());
 
         try {

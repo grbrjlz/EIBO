@@ -8,11 +8,7 @@ import java.util.ArrayList;
 public class PlaylistManager {
 
     private int aktPlaylist;
-    private ArrayList<Playlist> playlists = new ArrayList<>();
-    private ObservableList<Playlist> lists = FXCollections.observableArrayList(playlists);
-
-
-    //KONSTRUKTOREN
+    private final ObservableList<Playlist> playlists = FXCollections.observableArrayList(new ArrayList<>());
 
     public  PlaylistManager (Playlist playlist){
         this.playlists.add(playlist);
@@ -20,18 +16,7 @@ public class PlaylistManager {
     }
 
     public void addPlaylist (Playlist playlist){
-        this.playlists.add(playlist);
-    }
-
-    //GETTER
-
-    public Playlist getPlaylist (String playlistname){
-        for (Playlist playlist : playlists) {
-            if (playlist.toString().equalsIgnoreCase(playlistname)) {
-                return playlist;
-            }
-        }
-        return null;
+        playlists.add(playlist);
     }
 
     public Playlist getPlaylist (int index){
@@ -46,31 +31,20 @@ public class PlaylistManager {
         return this.playlists.get(aktPlaylist);
     }
 
-
-    public String getAktPlaylistName(){
-        return this.playlists.get(aktPlaylist).getName();
-    }
-
     public ArrayList<String> getPlaylistNames(){
         ArrayList<String> playlistnames = new ArrayList<>();
-        if (playlists!=null){
-            for (int i=0; i<playlists.size(); i++){
-                playlistnames.add(playlists.get(i).getName());
-            }
-            return playlistnames;
+        for (Playlist playlist : playlists) {
+            playlistnames.add(playlist.getName());
         }
-        return null;
+        return playlistnames;
     }
 
-    public ObservableList<Playlist> getLists(){
-        return this.lists;
-    }
-
+    /*
     public void savePlaylist(Playlist playlist){
         this.playlists.add(playlist);
     }
-
     public void deletePlaylist(Playlist playlist){
         this.playlists.remove(playlist);
     }
+    */
 }
