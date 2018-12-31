@@ -57,13 +57,20 @@ public class FileList extends VBox {
     }
 
     private void initialize() {
-        //Falls sich die aktPlaylist im Backend ändert
+        /**
+         * Falls sich die aktPlaylist im Backend ändert
+         */
         manager.aktPlaylistProperty().addListener((observable, oldValue, newValue) -> playlists.getSelectionModel().select(newValue.intValue()));
 
-        //Falls sich der aktuelle Song im Backend ändert
+
+        /**
+         * Falls sich der aktuelle Song im Backend ändert
+         */
         player.aktSongIndexProperty().addListener((observable, oldValue, newValue) -> songs.getSelectionModel().select(newValue.intValue()));
 
-        //Bei Klick auf eine Playlist
+        /**
+         * Bei Klick auf eine Playlist
+         */
         playlists.setOnMouseClicked(event -> {
             player.pause();
             int selected = playlists.getSelectionModel().getSelectedIndex();
@@ -74,7 +81,9 @@ public class FileList extends VBox {
             songs.setItems(newsongitems);
         });
 
-        //Bei Klick auf einen Song
+        /**
+         * Bei Klick auf einen Song
+         */
         songs.setOnMouseClicked(event -> {
             int selected = songs.getSelectionModel().getSelectedIndex();
             player.pause();

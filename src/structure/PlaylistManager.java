@@ -7,12 +7,17 @@ import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 
+/**
+ * Verwaltet alle Playlists, die das Programm benötigt, in einer ObservableArrayList
+ */
 public class PlaylistManager {
-
-    //private int aktPlaylist;
     private IntegerProperty aktPlaylist = new SimpleIntegerProperty();
     private final ObservableList<Playlist> playlists = FXCollections.observableArrayList(new ArrayList<>());
 
+    /**
+     * Standardplaylist wird dem Konstruktor mitgegeben
+     * @param playlist Standardplaylist
+     */
     public  PlaylistManager (Playlist playlist){
         this.playlists.add(playlist);
         aktPlaylist.setValue(0);

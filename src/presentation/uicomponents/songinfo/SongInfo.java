@@ -7,6 +7,9 @@ import javafx.scene.layout.VBox;
 import structure.Mp3Player;
 import structure.Track;
 
+/**
+ * Enthält Titel + Künstler
+ */
 public class SongInfo extends VBox {
 
     private Track track;
@@ -28,6 +31,10 @@ public class SongInfo extends VBox {
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
     }
 
+    /**
+     * Methode, um im nachhinein die Labels neu zu setzen
+     * @param player um Informationen abzurufen
+     */
     public void setLabels(Mp3Player player){
         this.track = player.getAktTrack();
         title.setText(track.getTitle());

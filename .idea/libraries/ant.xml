@@ -1,0 +1,14 @@
+<component name="libraryTable">
+  <library name="ant">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/ant.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/ant-launcher.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/core.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/jna.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/jna-platform.jar!/" />
+      <root url="jar://$PROJECT_DIR$/src/sources/processing/pde.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -9,6 +9,9 @@ import presentation.uicomponents.songinfo.SongInfo;
 import presentation.uicomponents.timecontrol.TimeControl;
 import structure.Mp3Player;
 
+/**
+ * Beinhaltet Cover, Songinfo, Songdetails
+ */
 public class PlayerContent extends VBox {
     private final Cover cover;
     private final SongInfo songinfo;
@@ -36,7 +39,9 @@ public class PlayerContent extends VBox {
     }
 
     private void initialize(){
-        //Bei Änderung des aktSongs werden Songinfo und Cover aktualisiert
+        /**
+         * Bei Änderung des aktSongs werden Labels und Cover neu gesetzt
+         */
         player.aktSongNameProperty().addListener((observable, oldValue, newValue) -> {
             songinfo.setLabels(player);
             songdetails.setLabels(player);

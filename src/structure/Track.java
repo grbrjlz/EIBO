@@ -7,6 +7,9 @@ import javafx.scene.image.Image;
 
 import java.io.ByteArrayInputStream;
 
+/**
+ * Ein Trackobjekt kennt die eigentliche .mp3-Datei + schon herausgefilterte Informationen zur jeweiligen .mp3
+ */
 public class Track {
 
     private final Mp3File song;
@@ -21,6 +24,10 @@ public class Track {
     private String key;
     private int genre, length, bpm;
 
+    /**
+     * Es wird zuerst versucht die wesentlichen Zusatzinformationen aus dem id3v2-Tag zu lesen, da dieses zuverlässiger ist
+     * @param song die .mp3 muss beim Erstellen eines Tracks mitgegeben werden
+     */
     public Track(Mp3File song) {
         this.song = song;
         this.filename = song.getFilename();
@@ -109,6 +116,10 @@ public class Track {
         } else return "-";
     }
 
+    /**
+     * Liefert das Cover direkt als Imageobjekt (statt Byte-Array)
+     * @return
+     */
     public Image getCover() {
         if (song.getId3v2Tag().getAlbumImage() != null) {
             try {
@@ -122,6 +133,12 @@ public class Track {
         } return null;
     }
 
+    /**
+     * Nicht in Benutzung, wird nun direkt über player.length() im Player abgerufen
+     * (Fehleranfällig)
+     *
+     * @return
+     */
     public int getLength() {
         return length;
     }

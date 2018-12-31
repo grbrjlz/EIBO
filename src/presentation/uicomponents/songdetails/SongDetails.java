@@ -8,7 +8,9 @@ import javafx.scene.layout.VBox;
 import structure.Mp3Player;
 import structure.Track;
 
-
+/**
+ * Enthält weitere Songinformationen
+ */
 public class SongDetails extends VBox {
 
     private Track song;
@@ -50,6 +52,10 @@ public class SongDetails extends VBox {
 
     }
 
+    /**
+     * Methode, um im nachhinein die Labels neu zu setzen
+     * @param player um Informationen abzurufen
+     */
     public void setLabels(Mp3Player player){
         this.song = player.getAktTrack();
 

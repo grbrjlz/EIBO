@@ -9,15 +9,21 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Eine Playlist besteht aus einer ArrayList der aktuellen Tracks, dem Playlistnamen und der Anzahl der Songs
+ */
 public class Playlist {
     private final String name;
     private ArrayList<Track> songs;
 
     private final int size;
 
+    /**
+     * Falls eine Playlist ohne mitgegebenen Parametern initialisiert wird, wird eine default-Playlist mit Standardsongs in /songs erstellt
+     */
     public Playlist() {
         songs = new ArrayList<>();
-        File file = new File("default2.m3u");
+        File file = new File("default.m3u");
         File directory = new File("./songs");
         File[] content = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
         if (content != null) Arrays.sort(content);
@@ -32,9 +38,14 @@ public class Playlist {
         this.size = songs.size();
     }
 
+    /**
+     * Werden Parameter mitgegeben, wird eine neue Playlist erstellt
+     * @param playlistname der dateiname der Playlist (ohne .m3u)
+     * @param songdirectory der Ordner des Playlistinhalts
+     */
     public Playlist(String playlistname, String songdirectory) {
         songs = new ArrayList<>();
-        File file = new File(playlistname);
+        File file = new File(playlistname+".m3u");
         File directory = new File(songdirectory);
         File[] content = directory.listFiles((dir, name) -> name.toLowerCase().endsWith(".mp3"));
         if (content != null) Arrays.sort(content);
@@ -80,16 +91,6 @@ public class Playlist {
         return this.name;
     }
 
-
-    /*
-    public int getAktSongNumber(){
-        return aktSong;
-    }
-    public Track getAktSong() {
-        return songs.get(aktSong);
-    }
-    */
-
     public ArrayList<String> getSongNames() {
         ArrayList<String> songnames = new ArrayList<>();
         if (songs != null) {
@@ -108,7 +109,6 @@ public class Playlist {
     public Track getSong(int i) {
         return songs.get(i);
     }
-
 
     int getSize() {
         return songs.size();

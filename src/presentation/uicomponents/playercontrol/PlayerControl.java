@@ -8,6 +8,12 @@ import javafx.scene.layout.*;
 import javafx.scene.control.Button;
 import structure.Mp3Player;
 
+/**
+ * Beinhaltet die Steuerungselemente im BottomPanel:
+ * play/pause, stop, skip, back
+ * shuffle, repeat
+ * volumeslider
+ */
 public class PlayerControl extends BorderPane {
     private final Mp3Player player;
 
@@ -52,7 +58,7 @@ public class PlayerControl extends BorderPane {
         repeat.setStyle("-fx-border-color: #ee1200");
 
 
-        volume = new Slider(-50, 0, -10);
+        volume = new Slider(0, 50, 40);
 
         center.getChildren().addAll(back, play, stop, skip);
         left.getChildren().addAll(shuffle, repeat);
@@ -78,7 +84,9 @@ public class PlayerControl extends BorderPane {
     }
 
     private void initialize(){
-        //Wenn Buttons geklickt werden
+        /**
+         * Falls auf einen der Button geklickt wurde
+         */
         play.addEventHandler(ActionEvent.ACTION, e -> {
             if (!isPlaying) {
                 player.play();
@@ -103,10 +111,14 @@ public class PlayerControl extends BorderPane {
         shuffle.addEventHandler(ActionEvent.ACTION, e -> player.shuffle());
         repeat.addEventHandler(ActionEvent.ACTION, e -> player.repeat());
 
-        //Bei Verschieben des Volumesliders
+        /**
+         * Falls der Volumeslider verschoben wird
+         */
         volume.valueProperty().addListener((observable, oldValue, newValue) -> player.setVolume(newValue.floatValue()));
 
-        //Repräsentation des aktuellen Zustands im Backend durch Grün/Rot
+        /**
+         * Falls sich im Backend etwas an shuffle bzw. repeat ändert
+         */
         player.shuffleProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue){
                 shuffle.setStyle("-fx-border-color: #88ee00");

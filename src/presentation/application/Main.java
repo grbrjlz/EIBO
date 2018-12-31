@@ -5,19 +5,29 @@ import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import presentation.scenes.playerview.PlayerViewController;
-import presentation.scenes.playlistview.PlaylistViewController;
+import presentation.scenes.graphicsview.GraphicsView;
+import presentation.scenes.playerview.PlayerView;
+import presentation.scenes.playlistview.PlaylistView;
 import structure.Mp3Player;
 import structure.Playlist;
 import structure.PlaylistManager;
+import structure.Views;
 
+/**
+ * Main-Applikation
+ */
 public class Main extends Application {
 
-    private PlayerViewController playerViewController;
-    private PlaylistViewController playlistViewController;
+    private PlaylistView playlistview;
+    private PlayerView playerview;
+    private GraphicsView graphicsview;
+
     private Stage primaryStage;
 
     @Override
+    /**
+     * Hier werden alle im Backend benötigten Klassen, plus die Controller der benötigten Views initialisiert
+     */
     public void init(){
 
         Playlist defPlaylist = new Playlist();
@@ -25,11 +35,16 @@ public class Main extends Application {
         Mp3Player player = new Mp3Player(defPlaylist);
         manager.addPlaylist(new Playlist("eigenePlaylist", "./newsongs"));
 
-        playerViewController = new PlayerViewController(player, this);
-        playlistViewController = new PlaylistViewController(player, manager,this);
+        playlistview = new PlaylistView(player, manager, this);
+        playerview = new PlayerView(player, this);
+        graphicsview = new GraphicsView(player, this);
     }
 
     @Override
+    /**
+     * Hier kann die default-Ansicht (was angezeigt werden soll, sobald sich das Programm öffnet) angepasst werden
+     * Momentan: Playerview
+     */
     public void start(Stage primaryStage) {
         this.primaryStage = primaryStage;
 
@@ -38,7 +53,7 @@ public class Main extends Application {
 
         //switchView("PLAYER");
         Scene scene = new Scene(root, 1000, 750);
-        scene.setRoot(playlistViewController.getView());
+        scene.setRoot(graphicsview);
 
         scene.getStylesheets().add(getClass().
                 getResource("application.css").toExternalForm());
@@ -51,14 +66,18 @@ public class Main extends Application {
         primaryStage.show();
     }
 
-    public void switchView(String name) {
+    public void switchView(Views view) {
         Scene scene = primaryStage.getScene();
-        switch (name) {
-            case "PLAYER":
-                scene.setRoot(playerViewController.getView());
+        switch (view) {
+            case player:
+                scene.setRoot(playerview);
                 break;
-            case "LIST":
-                scene.setRoot(playlistViewController.getView());
+            case playlist:
+                scene.setRoot(playlistview);
+                break;
+            case graphics:
+                scene.setRoot(graphicsview);
+                break;
         }
     }
 
