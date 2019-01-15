@@ -14,19 +14,19 @@ public class ViewControl extends HBox {
     public ViewControl(Main application){
         this.application = application;
 
-        this.playlistview = new Button("list");
-        playlistview.setUserData("playlistview");
-        playlistview.setId("playlistview");
+        this.playlistview = new Button();
+        playlistview.setUserData("list");
+        playlistview.setId("list");
 
-        this.playerview = new Button("player");
-        playerview.setUserData("playerview");
-        playerview.setId("playerview");
+        this.playerview = new Button();
+        playerview.setUserData("player");
+        playerview.setId("player");
 
 
 
-        this.graphicsview = new Button("graphics");
-        graphicsview.setUserData("graphicsview");
-        graphicsview.setId("graphicsview");
+        this.graphicsview = new Button();
+        graphicsview.setUserData("graph");
+        graphicsview.setId("graph");
 
 
         this.setSpacing(10);

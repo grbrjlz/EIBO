@@ -74,7 +74,7 @@ public class GraphicsContent extends BorderPane {
         //this.setPrefWidth(1200);
         //this.setPrefHeight(900);
 
-        this.setStyle("-fx-background-color: #2E2E30;");
+        this.setStyle("-fx-background-color: #1b1b1b;");
         //this.getChildren().addAll(songinfo, spektrum);
         this.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
         initialize();

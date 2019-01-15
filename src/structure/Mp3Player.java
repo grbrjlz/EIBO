@@ -108,8 +108,6 @@ public class Mp3Player {
         return this.spektrum;
     }
 
-
-
     public void play(){
         player.play();
         playing.setValue(true);

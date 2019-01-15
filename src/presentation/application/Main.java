@@ -51,7 +51,6 @@ public class Main extends Application {
         Pane root = new Pane();
         root.setStyle("-fx-background-color: transparent;");
 
-        //switchView("PLAYER");
         Scene scene = new Scene(root, 1000, 750);
         scene.setRoot(graphicsview);
 
